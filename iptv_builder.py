@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 
 # --- CONFIGURATION ---
-CHANNELS_URL = 'https://raw.githubusercontent.com/iptv-org/database/refs/heads/master/data/channels.csv'
+CHANNELS_URL = 'https://raw.githubusercontent.com/iptv-org/database/refs/heads/master/data/feeds.csv'
 STREAMS_URL = 'https://iptv-org.github.io/api/streams.json'
 OUTPUT_FILE = 'playlist.m3u'
 
