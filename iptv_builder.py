@@ -33,9 +33,10 @@ def download_and_filter_channels():
 
         count = 0
         for row in reader:
-            if row.get("languages") == LANGUAGE_FILTER:
+            if LANGUAGE_FILTER in row.get("languages", ""):
                 writer.writerow(row)
                 count += 1
+
 
     print(f"Filtered {count} channels with language '{LANGUAGE_FILTER}'")
 
@@ -50,12 +51,23 @@ def merge_streams():
     print("Reading filtered channels...")
     df_channels = pd.read_csv(FILTERED_CSV)
 
+    if df_channels.empty:
+        print("⚠ No channels found after filtering. Skipping merge.")
+        return
+
     print("Merging data...")
-    merged_df = pd.merge(df_streams, df_channels, on="channel", how="inner")
+    merged_df = pd.merge(
+        df_streams,
+        df_channels,
+        left_on="channel",
+        right_on="id",
+        how="inner"
+    )
 
     merged_df.to_csv(MERGED_CSV, index=False)
 
     print(f"Merged {len(merged_df)} rows")
+
 
 
 # ==============================
