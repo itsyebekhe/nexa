@@ -21,24 +21,21 @@ OUTPUT_M3U = "playlist.m3u"
 # ==============================
 def download_and_filter_channels():
     print("Downloading channels CSV...")
-    response = requests.get(CHANNELS_URL)
-    response.raise_for_status()
 
-    csv_data = StringIO(response.text)
-    reader = csv.DictReader(csv_data)
+    df = pd.read_csv(CHANNELS_URL, dtype=str)
+    df["languages"] = df["languages"].fillna("")
 
-    with open(FILTERED_CSV, "w", newline="", encoding="utf-8") as f_out:
-        writer = csv.DictWriter(f_out, fieldnames=reader.fieldnames)
-        writer.writeheader()
+    if "languages" not in df.columns:
+        print("❌ 'languages' column not found!")
+        print("Columns:", df.columns)
+        return
 
-        count = 0
-        for row in reader:
-            if LANGUAGE_FILTER in row.get("languages", ""):
-                writer.writerow(row)
-                count += 1
+    filtered_df = df[df["languages"].str.contains(LANGUAGE_FILTER, na=False)]
 
+    print(f"Filtered {len(filtered_df)} channels with language '{LANGUAGE_FILTER}'")
 
-    print(f"Filtered {count} channels with language '{LANGUAGE_FILTER}'")
+    filtered_df.to_csv(FILTERED_CSV, index=False)
+
 
 
 # ==============================
