@@ -1,121 +1,105 @@
-import csv
-import requests
 import pandas as pd
-from io import StringIO
+import sys
 
-# ==============================
-# CONFIG
-# ==============================
-CHANNELS_URL = "https://raw.githubusercontent.com/iptv-org/database/refs/heads/master/data/channels.csv"
-STREAMS_URL = "https://iptv-org.github.io/api/streams.json"
+# --- CONFIGURATION ---
+CHANNELS_URL = 'https://raw.githubusercontent.com/iptv-org/database/refs/heads/master/data/channels.csv'
+STREAMS_URL = 'https://iptv-org.github.io/api/streams.json'
+OUTPUT_FILE = 'playlist.m3u'
 
-LANGUAGE_FILTER = "fas"
+# Filter Settings
+TARGET_COLUMN = 'languages'
+SEARCH_VALUE = 'fas'
 
-FILTERED_CSV = "filtered_channels.csv"
-MERGED_CSV = "final_merged_list.csv"
-OUTPUT_M3U = "playlist.m3u"
+def generate_playlist():
+    print("--- Starting Playlist Generation ---")
 
+    # 1. LOAD AND FILTER CHANNELS
+    print(f"Downloading channels from: {CHANNELS_URL}")
+    try:
+        df_channels = pd.read_csv(CHANNELS_URL)
+        
+        # Filter the data
+        # We ensure the column is treated as a string to avoid errors
+        df_channels[TARGET_COLUMN] = df_channels[TARGET_COLUMN].astype(str)
+        df_filtered = df_channels[df_channels[TARGET_COLUMN] == SEARCH_VALUE].copy()
+        
+        print(f"Found {len(df_filtered)} channels matching '{SEARCH_VALUE}'.")
+        
+        # Rename 'id' to 'channel' to prepare for merging with streams data
+        # (streams.json uses 'channel', channels.csv uses 'id')
+        if 'id' in df_filtered.columns:
+            df_filtered = df_filtered.rename(columns={'id': 'channel'})
+            
+    except Exception as e:
+        print(f"Error loading channels: {e}")
+        sys.exit(1)
 
-# ==============================
-# STEP 1 — Download & Filter Channels
-# ==============================
-def download_and_filter_channels():
-    print("Downloading channels CSV...")
+    # 2. LOAD AND MERGE STREAMS
+    print(f"Downloading streams from: {STREAMS_URL}")
+    try:
+        df_streams = pd.read_json(STREAMS_URL)
+        
+        # Merge data (Inner Join)
+        # matches streams.channel with the filtered channels.channel
+        merged_df = pd.merge(df_streams, df_filtered, on='channel', how='inner')
+        
+        # Fallback: If 'title' is missing, use 'name' from the channel data
+        if 'title' not in merged_df.columns:
+            merged_df['title'] = merged_df['name']
+            
+        print(f"Merged data contains {len(merged_df)} playable streams.")
+        
+    except Exception as e:
+        print(f"Error loading streams or merging: {e}")
+        sys.exit(1)
 
-    df = pd.read_csv(CHANNELS_URL, dtype=str)
-    df["languages"] = df["languages"].fillna("")
+    # 3. CONVERT TO M3U
+    print(f"Writing to {OUTPUT_FILE}...")
+    
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as m3u:
+        m3u.write("#EXTM3U\n")
 
-    if "languages" not in df.columns:
-        print("❌ 'languages' column not found!")
-        print("Columns:", df.columns)
-        return
+        for _, row in merged_df.iterrows():
+            # Extract data, handling NaN (empty) values safely
+            title = str(row.get("title", "")).strip()
+            url = str(row.get("url", "")).strip()
+            
+            # Using 'name' for tvg-id as per your request (usually 'id' is better, but following your logic)
+            tvg_id = str(row.get("name", "")).strip() 
+            
+            # Clean up broadcast area
+            group = str(row.get("broadcast_area", "")).replace("c/", "").replace(";", ", ").replace("nan", "")
+            
+            language = str(row.get("languages", "")).replace("nan", "")
+            quality = str(row.get("format", "")).replace("nan", "") # 'format' is sometimes missing
+            
+            # User Agent and Referrer are often in streams.json as 'user_agent' and 'http_referrer'
+            user_agent = str(row.get("user_agent", "")).replace("nan", "")
+            referrer = str(row.get("http_referrer", "")).replace("nan", "")
+            
+            # Skip invalid URLs
+            if not url or url.lower() == "nan":
+                continue
 
-    filtered_df = df[df["languages"].str.contains(LANGUAGE_FILTER, na=False)]
+            # Build EXTINF line
+            extinf = (
+                f'#EXTINF:-1 tvg-id="{tvg_id}" '
+                f'group-title="{group}" '
+                f'tvg-language="{language}" '
+                f'tvg-quality="{quality}",{title}\n'
+            )
 
-    print(f"Filtered {len(filtered_df)} channels with language '{LANGUAGE_FILTER}'")
+            m3u.write(extinf)
 
-    filtered_df.to_csv(FILTERED_CSV, index=False)
+            # Add User-Agent or Referrer headers if they exist
+            if user_agent:
+                m3u.write(f"#EXTVLCOPT:http-user-agent={user_agent}\n")
+            if referrer:
+                m3u.write(f"#EXTVLCOPT:http-referrer={referrer}\n")
 
+            m3u.write(f"{url}\n\n")
 
+    print(f"✅ Success! Playlist saved to '{OUTPUT_FILE}'")
 
-# ==============================
-# STEP 2 — Merge with Streams
-# ==============================
-def merge_streams():
-    print("Downloading streams JSON...")
-    df_streams = pd.read_json(STREAMS_URL)
-
-    print("Reading filtered channels...")
-    df_channels = pd.read_csv(FILTERED_CSV)
-
-    if df_channels.empty:
-        print("⚠ No channels found after filtering. Skipping merge.")
-        return
-
-    print("Merging data...")
-    merged_df = pd.merge(
-        df_streams,
-        df_channels,
-        left_on="channel",
-        right_on="id",
-        how="inner"
-    )
-
-    merged_df.to_csv(MERGED_CSV, index=False)
-
-    print(f"Merged {len(merged_df)} rows")
-
-
-
-# ==============================
-# STEP 3 — Convert to M3U
-# ==============================
-def csv_to_m3u():
-    print("Generating M3U playlist...")
-
-    with open(MERGED_CSV, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-
-        with open(OUTPUT_M3U, "w", encoding="utf-8") as m3u:
-            m3u.write("#EXTM3U\n")
-
-            for row in reader:
-                title = row.get("title", "").strip()
-                url = row.get("url", "").strip()
-                tvg_id = row.get("name", "").strip()
-                group = row.get("broadcast_area", "").replace("c/", "").replace(";", ", ")
-                language = row.get("languages", "")
-                quality = row.get("format", "")
-                user_agent = row.get("user_agent", "")
-                referrer = row.get("referrer", "")
-
-                if not url:
-                    continue
-
-                extinf = (
-                    f'#EXTINF:-1 tvg-id="{tvg_id}" '
-                    f'group-title="{group}" '
-                    f'tvg-language="{language}" '
-                    f'tvg-quality="{quality}",{title}\n'
-                )
-
-                m3u.write(extinf)
-
-                if user_agent:
-                    m3u.write(f"#EXTVLCOPT:http-user-agent={user_agent}\n")
-                if referrer:
-                    m3u.write(f"#EXTVLCOPT:http-referrer={referrer}\n")
-
-                m3u.write(f"{url}\n\n")
-
-    print(f"✅ IPTV playlist created: {OUTPUT_M3U}")
-
-
-# ==============================
-# MAIN
-# ==============================
 if __name__ == "__main__":
-    download_and_filter_channels()
-    merge_streams()
-    csv_to_m3u()
-    print("🎉 All done successfully!")
+    generate_playlist()
