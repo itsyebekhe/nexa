@@ -13,22 +13,25 @@ SEARCH_VALUE = 'fas'
 def generate_playlist():
     print("--- Starting Playlist Generation ---")
 
-    # 1. LOAD AND FILTER CHANNELS
+    # 1. LOAD AND FILTER CHANNELS (feeds.csv)
     print(f"Downloading channels from: {CHANNELS_URL}")
     try:
         df_channels = pd.read_csv(CHANNELS_URL)
         
-        # Filter the data
-        # We ensure the column is treated as a string to avoid errors
+        # Ensure the target column exists to avoid errors
+        if TARGET_COLUMN not in df_channels.columns:
+            # Fallback if column missing (just in case), though you said it works.
+            print(f"Warning: Column '{TARGET_COLUMN}' not found. Creating empty one.")
+            df_channels[TARGET_COLUMN] = ""
+
         df_channels[TARGET_COLUMN] = df_channels[TARGET_COLUMN].astype(str)
-        df_filtered = df_channels[df_channels[TARGET_COLUMN] == SEARCH_VALUE].copy()
+        df_filtered = df_channels[df_channels[TARGET_COLUMN].str.contains(SEARCH_VALUE, na=False)].copy()
         
         print(f"Found {len(df_filtered)} channels matching '{SEARCH_VALUE}'.")
         
-        # Rename 'id' to 'channel' to prepare for merging with streams data
-        # (streams.json uses 'channel', channels.csv uses 'id')
-        if 'id' in df_filtered.columns:
-            df_filtered = df_filtered.rename(columns={'id': 'channel'})
+        # --- FIX: DO NOT RENAME COLUMNS HERE ---
+        # Renaming caused the "label 'channel' is not unique" error
+        # because the dataframe likely already had a 'channel' column or conflicted during merge.
             
     except Exception as e:
         print(f"Error loading channels: {e}")
@@ -39,11 +42,18 @@ def generate_playlist():
     try:
         df_streams = pd.read_json(STREAMS_URL)
         
-        # Merge data (Inner Join)
-        # matches streams.channel with the filtered channels.channel
-        merged_df = pd.merge(df_streams, df_filtered, on='channel', how='inner')
+        # --- FIX: USE LEFT_ON AND RIGHT_ON ---
+        # We join 'channel' (from streams.json) with 'id' (from your csv)
+        merged_df = pd.merge(
+            df_streams, 
+            df_filtered, 
+            left_on='channel', 
+            right_on='id', 
+            how='inner'
+        )
         
-        # Fallback: If 'title' is missing, use 'name' from the channel data
+        # Fallback for title
+        # If 'title' isn't in streams, use 'name' from the csv
         if 'title' not in merged_df.columns:
             merged_df['title'] = merged_df['name']
             
@@ -60,24 +70,20 @@ def generate_playlist():
         m3u.write("#EXTM3U\n")
 
         for _, row in merged_df.iterrows():
-            # Extract data, handling NaN (empty) values safely
-            title = str(row.get("title", "")).strip()
+            # Extract data
+            title = str(row.get("name", "")).strip() 
             url = str(row.get("url", "")).strip()
+            tvg_id = str(row.get("id", "")).strip() # Using the ID from csv
             
-            # Using 'name' for tvg-id as per your request (usually 'id' is better, but following your logic)
-            tvg_id = str(row.get("name", "")).strip() 
+            # Clean up broadcast area or language for the group title
+            group = str(row.get("languages", "")).replace("nan", "")
             
-            # Clean up broadcast area
-            group = str(row.get("broadcast_area", "")).replace("c/", "").replace(";", ", ").replace("nan", "")
+            logo = str(row.get("logo", "")).replace("nan", "")
             
-            language = str(row.get("languages", "")).replace("nan", "")
-            quality = str(row.get("format", "")).replace("nan", "") # 'format' is sometimes missing
-            
-            # User Agent and Referrer are often in streams.json as 'user_agent' and 'http_referrer'
+            # User Agent and Referrer
             user_agent = str(row.get("user_agent", "")).replace("nan", "")
             referrer = str(row.get("http_referrer", "")).replace("nan", "")
             
-            # Skip invalid URLs
             if not url or url.lower() == "nan":
                 continue
 
@@ -85,13 +91,12 @@ def generate_playlist():
             extinf = (
                 f'#EXTINF:-1 tvg-id="{tvg_id}" '
                 f'group-title="{group}" '
-                f'tvg-language="{language}" '
-                f'tvg-quality="{quality}",{title}\n'
+                f'tvg-logo="{logo}" '
+                f',{title}\n'
             )
 
             m3u.write(extinf)
 
-            # Add User-Agent or Referrer headers if they exist
             if user_agent:
                 m3u.write(f"#EXTVLCOPT:http-user-agent={user_agent}\n")
             if referrer:
