@@ -14,7 +14,7 @@ SEARCH_TERM = 'fas' # Persian
 def generate_playlist():
     print("--- Starting Process ---")
 
-    # 1. Download and Filter CSV Data (feeds.csv)
+    # 1. Download and Filter CSV Data
     print(f"1. Downloading metadata from: {INPUT_CSV_URL}")
     try:
         df_csv = pd.read_csv(INPUT_CSV_URL)
@@ -22,25 +22,32 @@ def generate_playlist():
         print(f"Error downloading CSV: {e}")
         return
 
-    # Check if the column exists
+    # Check if target column exists
     if TARGET_COLUMN not in df_csv.columns:
         print(f"Error: Column '{TARGET_COLUMN}' not found in CSV.")
+        # Optional: Print available columns to help debug
+        print(f"Available columns: {list(df_csv.columns)}")
         return
 
-    # Filter rows (Handle missing values safely)
+    # Filter rows
     print(f"   Filtering for {TARGET_COLUMN} = '{SEARCH_TERM}'...")
     df_filtered = df_csv[df_csv[TARGET_COLUMN] == SEARCH_TERM].copy()
     
-    # REMOVED: The logic that renamed 'id' to 'channel'. 
-    # feeds.csv already has a 'channel' column.
-
+    # --- FIX FOR "CHANNEL NOT UNIQUE" ERROR ---
+    # We need a column named 'channel' to merge with streams.json.
+    # If the CSV has 'id' but not 'channel', we rename 'id' to 'channel'.
+    # If it already has 'channel', we do nothing.
+    if 'channel' not in df_filtered.columns and 'id' in df_filtered.columns:
+        print("   Renaming 'id' column to 'channel' for merging...")
+        df_filtered.rename(columns={'id': 'channel'}, inplace=True)
+    
     print(f"   Found {len(df_filtered)} rows matching criteria.")
 
     if df_filtered.empty:
-        print("No channels found with that language. Stopping.")
+        print("No channels found. Stopping.")
         return
 
-    # 2. Download JSON Data (streams.json)
+    # 2. Download JSON Data
     print(f"2. Downloading streams from: {STREAMS_JSON_URL}")
     try:
         df_streams = pd.read_json(STREAMS_JSON_URL)
@@ -51,19 +58,18 @@ def generate_playlist():
     # 3. Merge Data
     print("3. Merging streams with csv data...")
     
-    # Both files have a 'url' column. We must resolve this collision.
-    # suffixes=('', '_src') means:
-    # - Columns from streams.json (left) keep their names (e.g., 'url')
-    # - Columns from feeds.csv (right) get '_src' added (e.g., 'url_src')
+    # We use suffixes to prevent naming collisions.
+    # Columns from streams.json keep their names.
+    # Columns from the CSV get '_info' added to them (e.g., 'name' -> 'name_info').
     merged_df = pd.merge(
         df_streams, 
         df_filtered, 
         on='channel', 
         how='inner', 
-        suffixes=('', '_src')
+        suffixes=('', '_info')
     )
     
-    # Replace NaN values with empty strings
+    # Handle NaN values
     merged_df = merged_df.replace({np.nan: ""})
     
     print(f"   Total streams matched: {len(merged_df)}")
@@ -75,32 +81,42 @@ def generate_playlist():
         m3u.write("#EXTM3U\n")
 
         for index, row in merged_df.iterrows():
-            # Get the Stream URL (from streams.json)
+            # Get URL
             url = str(row.get("url", "")).strip()
             
-            # If the URL is empty or it's just the feed source URL, skip it
+            # Skip if URL is empty
             if not url:
                 continue
 
-            # Mapping columns based on feeds.csv headers
-            # 'name' is usually the channel name in feeds.csv
-            title = str(row.get("name", "")).strip() 
-            tvg_id = str(row.get("channel", "")).strip()
+            # --- NAME SELECTION ---
+            # You requested to use the Channel ID as the name.
+            # 'channel' is the ID used to merge the files.
+            channel_id = str(row.get("channel", "")).strip()
             
-            # Clean up broadcast area
+            # Use Channel ID as the title
+            title = channel_id
+            
+            # OPTIONAL: If you want ID + Name, uncomment the line below:
+            # human_name = str(row.get("name_info", "")).strip()
+            # title = f"{channel_id} | {human_name}"
+
+            # TVG ID (Guide ID)
+            tvg_id = channel_id
+            
+            # Group (Broadcast Area)
             group = str(row.get("broadcast_area", "")).replace("c/", "").replace(";", ", ")
             
+            # Language
             language = str(row.get("languages", ""))
             
-            # Streams.json sometimes has 'format' (mp4, m3u8), feeds.csv does not.
-            # We look for it, but default to empty.
+            # Quality/Format
             quality = str(row.get("format", ""))
             
+            # User Agent / Referrer
             user_agent = str(row.get("user_agent", ""))
             referrer = str(row.get("referrer", ""))
 
             # Build EXTINF line
-            # Format: #EXTINF:-1 tvg-id="ID" group-title="Group",Title
             extinf = (
                 f'#EXTINF:-1 tvg-id="{tvg_id}" '
                 f'group-title="{group}" '
@@ -109,7 +125,7 @@ def generate_playlist():
             )
             m3u.write(extinf)
 
-            # Add HTTP headers if they exist in streams.json
+            # Add Headers if present
             if user_agent:
                 m3u.write(f"#EXTVLCOPT:http-user-agent={user_agent}\n")
             if referrer:
