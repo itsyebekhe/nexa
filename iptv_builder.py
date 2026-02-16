@@ -3,7 +3,7 @@ import numpy as np
 
 # --- CONFIGURATION ---
 # URL for the channels metadata (Database)
-INPUT_CSV_URL = 'https://raw.githubusercontent.com/iptv-org/database/master/data/feed.csv'
+INPUT_CSV_URL = 'https://raw.githubusercontent.com/iptv-org/database/master/data/feeds.csv'
 
 # URL for the live streams
 STREAMS_JSON_URL = 'https://iptv-org.github.io/api/streams.json'
