@@ -228,7 +228,7 @@ https://ca-rt.onetv.app/gemseries/index-0.m3u8?token=onetv202
 https://ca-rt.onetv.app/gemseriesplus/index-0.m3u8?token=onetv202
 
 #EXTINF:-1 tvg-id="GEMSport.tr" group-title="IR" tvg-language="fas" tvg-quality="576i",GEMSport.tr
-https://steep-wildflower-284d.nhhwkiszzzvcuojxdo.workers.dev/?url=https://gg.hls2.xyz/live/IR%20-%20GEM%20Sport/chunks.m3u8
+https://steep-wildflower-284d.nhhwkiszzzvcuojxdo.workers.dev/?url=https://gg.hls2.xyz/live/IR+-+GEM+Sport/chunks.m3u8
 
 #EXTINF:-1 tvg-id="GEMTV.tr" group-title="IR" tvg-language="fas" tvg-quality="480i",GEMTV.tr
 https://ca-rt.onetv.app/gem/index-0.m3u8?token=onetv202
