@@ -443,6 +443,9 @@ https://ncdn.telewebion.ir/namayesh/live/playlist.m3u8
 #EXTINF:-1 tvg-id="Nasim.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",Nasim.ir
 https://ncdn.telewebion.ir/nasim/live/playlist.m3u8
 
+#EXTINF:-1 tvg-id="NationalIranianCongressTV.us" group-title="IR" tvg-language="fas" tvg-quality="720p",NationalIranianCongressTV.us
+https://tv.iraniancongress.com/stream/tv.m3u8
+
 #EXTINF:-1 tvg-id="NavahangTV.fi" group-title="FI" tvg-language="fas" tvg-quality="576i",NavahangTV.fi
 https://hls.navahang.live/hls/stream.m3u8
 
