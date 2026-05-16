@@ -257,6 +257,9 @@ https://6n3yowknl9ok-hls-live.5centscdn.com/HMN/271ddf829afeece44d8732757fba1a66
 #EXTINF:-1 tvg-id="HighVisionTV.us" group-title="US, IR" tvg-language="fas" tvg-quality="480i",HighVisionTV.us
 https://streamer1.connectto.com/HIGHVISION_WEB_1205/index.m3u8
 
+#EXTINF:-1 tvg-id="HodHodFarsiTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",HodHodFarsiTV.ir
+https://northtelecom.b-cdn.net/hodhodtv.m3u8
+
 #EXTINF:-1 tvg-id="HomePlus.ir" group-title="CN" tvg-language="fas" tvg-quality="720p",HomePlus.ir
 https://homeplushls.wns.live/hls/stream.m3u8
 
