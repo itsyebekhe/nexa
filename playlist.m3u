@@ -92,6 +92,9 @@ https://vs-hls-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persia
 #EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
 https://vs-hls-pushb-ww.live.cf.md.bbci.co.uk/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2.m3u8
 
+#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
+https://vs-cmaf-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/hevc_iptv_mse_v0.mpd
+
 #EXTINF:-1 tvg-id="BoushehrTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",BoushehrTV.ir
 https://ncdn.telewebion.ir/bushehr/live/playlist.m3u8
 
