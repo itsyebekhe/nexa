@@ -311,6 +311,9 @@ https://live.playstop.me/1816184091/index.m3u8
 #EXTINF:-1 tvg-id="IranInternational.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",IranInternational.uk
 https://live.playstop.me/LS-63503-4/index.m3u8
 
+#EXTINF:-1 tvg-id="IranInternational.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",IranInternational.uk
+https://hlspackager.akamaized.net/live/DB/IRAN_INTERNATIONAL/HLS/IRAN_INTERNATIONAL.m3u8
+
 #EXTINF:-1 tvg-id="IranJewishTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",IranJewishTV.ir
 http://iran620.com:1935/live/IranJewishTv/playlist.m3u8
 
