@@ -371,6 +371,9 @@ https://ncdn.telewebion.ir/jahanbin/live/playlist.m3u8
 #EXTINF:-1 tvg-id="KalemehTV.uk" group-title="IR" tvg-language="fas" tvg-quality="576i",KalemehTV.uk
 https://klmhls.wns.live/hls/stream.m3u8
 
+#EXTINF:-1 tvg-id="KalemehTV.uk" group-title="IR" tvg-language="fas" tvg-quality="576i",KalemehTV.uk
+https://kalemeh.tv/live/hls/gate.php?p=%2Flive%2Fngrp%3Akalemeh_all%2Fplaylist.m3u8
+
 #EXTINF:-1 tvg-id="KanalJadid.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",KanalJadid.uk
 https://kjhls.wns.live/hls/stream.m3u8
 
