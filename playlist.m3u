@@ -293,9 +293,6 @@ https://live.imamhossaintv.com/live/ih1.m3u8
 #EXTINF:-1 tvg-id="IraneFardaTV.uk" group-title="US, IR" tvg-language="fas" tvg-quality="720p",IraneFardaTV.uk
 https://hls.iranfarda.live/hls/stream.m3u8
 
-#EXTINF:-1 tvg-id="IraneFardaTV.uk" group-title="US, IR" tvg-language="fas" tvg-quality="720p",IraneFardaTV.uk
-https://iranefardalive.com/stream/live.m3u8
-
 #EXTINF:-1 tvg-id="Iraneman.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",Iraneman.ir
 https://ncdn.telewebion.ir/iraneman/live/playlist.m3u8
 
