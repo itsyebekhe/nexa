@@ -9,7 +9,7 @@ OUTPUT_FILE = 'playlist.m3u'
 
 # Filter settings
 TARGET_COLUMN = 'languages'
-SEARCH_TERM = 'fas' # Persian
+SEARCH_TERM = 'eng' # English
 
 def generate_playlist():
     print("--- Starting Process ---")
