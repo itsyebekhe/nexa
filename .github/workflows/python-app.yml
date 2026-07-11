@@ -1,4 +1,4 @@
-Name: Update IPTV Playlist
+name: Update IPTV Playlist
 
 on:
   push:
@@ -32,10 +32,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          # تغییر این خط برای برداشتن همه فایل‌های پلی‌لیست
           git add playlist.m3u playlist_hd.m3u playlist_sd.m3u
-          # یا می‌تونی بنویسی: git add playlist*.m3u
-          
           git commit -m "Auto-update playlists (All, HD, SD)" || exit 0
           git push
           
