@@ -5,7 +5,11 @@ import sys
 # --- CONFIGURATION ---
 INPUT_CSV_URL = 'https://raw.githubusercontent.com/iptv-org/database/master/data/feeds.csv'
 STREAMS_JSON_URL = 'https://iptv-org.github.io/api/streams.json'
-OUTPUT_FILE = 'playlist.m3u'
+
+# Output files
+OUTPUT_ALL = 'playlist.m3u'
+OUTPUT_HD = 'playlist_hd.m3u'
+OUTPUT_SD = 'playlist_sd.m3u'
 
 # Filter settings
 TARGET_COLUMN = 'languages'
@@ -22,25 +26,18 @@ def generate_playlist():
         print(f"Error downloading CSV: {e}")
         return
 
-    # Check if target column exists
     if TARGET_COLUMN not in df_csv.columns:
         print(f"Error: Column '{TARGET_COLUMN}' not found in CSV.")
-        # Optional: Print available columns to help debug
         print(f"Available columns: {list(df_csv.columns)}")
         return
 
-    # Filter rows
     print(f"   Filtering for {TARGET_COLUMN} = '{SEARCH_TERM}'...")
     df_filtered = df_csv[df_csv[TARGET_COLUMN] == SEARCH_TERM].copy()
-    
-    # --- FIX FOR "CHANNEL NOT UNIQUE" ERROR ---
-    # We need a column named 'channel' to merge with streams.json.
-    # If the CSV has 'id' but not 'channel', we rename 'id' to 'channel'.
-    # If it already has 'channel', we do nothing.
+
     if 'channel' not in df_filtered.columns and 'id' in df_filtered.columns:
         print("   Renaming 'id' column to 'channel' for merging...")
         df_filtered.rename(columns={'id': 'channel'}, inplace=True)
-    
+
     print(f"   Found {len(df_filtered)} rows matching criteria.")
 
     if df_filtered.empty:
@@ -57,10 +54,6 @@ def generate_playlist():
 
     # 3. Merge Data
     print("3. Merging streams with csv data...")
-    
-    # We use suffixes to prevent naming collisions.
-    # Columns from streams.json keep their names.
-    # Columns from the CSV get '_info' added to them (e.g., 'name' -> 'name_info').
     merged_df = pd.merge(
         df_streams, 
         df_filtered, 
@@ -68,51 +61,49 @@ def generate_playlist():
         how='inner', 
         suffixes=('', '_info')
     )
-    
-    # Handle NaN values
+
     merged_df = merged_df.replace({np.nan: ""})
-    
     print(f"   Total streams matched: {len(merged_df)}")
 
-    # 4. Generate M3U File
-    print(f"4. Writing M3U playlist to: {OUTPUT_FILE}")
-    
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as m3u:
-        m3u.write("#EXTM3U\n")
+    # 4. Generate M3U Files (All, HD, SD)
+    print("4. Writing M3U playlists...")
+
+    # Open all three files at once
+    try:
+        f_all = open(OUTPUT_ALL, 'w', encoding='utf-8')
+        f_hd = open(OUTPUT_HD, 'w', encoding='utf-8')
+        f_sd = open(OUTPUT_SD, 'w', encoding='utf-8')
+
+        # Write header for all files
+        f_all.write("#EXTM3U\n")
+        f_hd.write("#EXTM3U\n")
+        f_sd.write("#EXTM3U\n")
 
         for index, row in merged_df.iterrows():
-            # Get URL
             url = str(row.get("url", "")).strip()
-            
-            # Skip if URL is empty
             if not url:
                 continue
 
-            # --- NAME SELECTION ---
-            # You requested to use the Channel ID as the name.
-            # 'channel' is the ID used to merge the files.
             channel_id = str(row.get("channel", "")).strip()
-            
-            # Use Channel ID as the title
             title = channel_id
-            
-            # OPTIONAL: If you want ID + Name, uncomment the line below:
-            # human_name = str(row.get("name_info", "")).strip()
-            # title = f"{channel_id} | {human_name}"
-
-            # TVG ID (Guide ID)
             tvg_id = channel_id
-            
-            # Group (Broadcast Area)
             group = str(row.get("broadcast_area", "")).replace("c/", "").replace(";", ", ")
-            
-            # Language
             language = str(row.get("languages", ""))
+            quality = str(row.get("format", "")).lower() # Convert to lowercase for easier check
             
-            # Quality/Format
-            quality = str(row.get("format", ""))
+            # --- SD / HD DETECTION LOGIC ---
+            # We also check height/width if they exist in the row, or look into the format string
+            height = row.get("height", 0)
+            width = row.get("width", 0)
             
-            # User Agent / Referrer
+            is_hd = False
+            # Check by resolution numbers (720p and above is HD)
+            if (isinstance(height, (int, float)) and height >= 720) or (isinstance(width, (int, float)) and width >= 1280):
+                is_hd = True
+            # Check by text indicators in quality or url
+            elif "hd" in quality or "1080" in quality or "720" in quality or "hd" in url.lower():
+                is_hd = True
+
             user_agent = str(row.get("user_agent", ""))
             referrer = str(row.get("referrer", ""))
 
@@ -123,17 +114,35 @@ def generate_playlist():
                 f'tvg-language="{language}" '
                 f'tvg-quality="{quality}",{title}\n'
             )
-            m3u.write(extinf)
 
-            # Add Headers if present
-            if user_agent:
-                m3u.write(f"#EXTVLCOPT:http-user-agent={user_agent}\n")
-            if referrer:
-                m3u.write(f"#EXTVLCOPT:http-referrer={referrer}\n")
+            # Helper function to write to a specific file target
+            def write_to_file(file_obj):
+                file_obj.write(extinf)
+                if user_agent:
+                    file_obj.write(f"#EXTVLCOPT:http-user-agent={user_agent}\n")
+                if referrer:
+                    file_obj.write(f"#EXTVLCOPT:http-referrer={referrer}\n")
+                file_obj.write(f"{url}\n\n")
 
-            m3u.write(f"{url}\n\n")
+            # Always write to the main playlist
+            write_to_file(f_all)
 
-    print(f"✅ Success! Playlist created: {OUTPUT_FILE}")
+            # Separate based on quality
+            if is_hd:
+                write_to_file(f_hd)
+            else:
+                write_to_file(f_sd)
+
+    finally:
+        # Ensure all files are properly closed
+        f_all.close()
+        f_hd.close()
+        f_sd.close()
+
+    print(f"✅ Success! Created:")
+    print(f"   - All channels: {OUTPUT_ALL}")
+    print(f"   - HD only: {OUTPUT_HD}")
+    print(f"   - SD only: {OUTPUT_SD}")
 
 if __name__ == "__main__":
     generate_playlist()
