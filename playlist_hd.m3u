@@ -373,6 +373,15 @@ https://amg00222-amg00222c4-amgplt0002.playout.now3.amagi.tv/aljazeera-noscte/pl
 #EXTINF:-1 tvg-id="AMC.us" group-title="US" tvg-language="eng" tvg-quality="1080i",AMC.us
 http://41.223.30.230/AMC/index.m3u8
 
+#EXTINF:-1 tvg-id="AMC.us" group-title="US" tvg-language="eng" tvg-quality="480i",AMC.us
+http://190.11.225.124:5000/live/amc_hd/playlist.m3u8
+
+#EXTINF:-1 tvg-id="AMC.us" group-title="US" tvg-language="eng" tvg-quality="1080i",AMC.us
+http://190.11.225.124:5000/live/amc_hd/playlist.m3u8
+
+#EXTINF:-1 tvg-id="AMC.us" group-title="US" tvg-language="eng" tvg-quality="480i",AMC.us
+http://190.11.225.124:5000/live/amc_hd/playlist.m3u8
+
 #EXTINF:-1 tvg-id="AMC.us" group-title="US" tvg-language="eng" tvg-quality="1080i",AMC.us
 http://23.239.31.26:8989/amc/index.m3u8
 
@@ -5991,6 +6000,9 @@ http://167.250.126.140:7777/BLOOMBERG-HD/index.m3u8
 http://167.250.126.140:7777/BLOOMBERG-HD/index.m3u8
 
 #EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/EUR" tvg-language="eng" tvg-quality="1080i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/EUR" tvg-language="eng" tvg-quality="1080i",BloombergTV.us
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
 https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bloomberg-television/bloombergtv.m3u8?ads.vf=XfUcpFmGLda
 
@@ -6310,6 +6322,12 @@ https://jmp2.uk/plu-62f54c6439183b000769fb8f.m3u8
 
 #EXTINF:-1 tvg-id="CSINYenespanol.us" group-title="US" tvg-language="eng" tvg-quality="720p",CSINYenespanol.us
 https://jmp2.uk/plu-632b606e12a67b0007c9e371.m3u8
+
+#EXTINF:-1 tvg-id="CSPAN.us" group-title="US" tvg-language="eng" tvg-quality="480i",CSPAN.us
+http://40.160.24.52/C-SPAN_HD/index.m3u8
+
+#EXTINF:-1 tvg-id="CTVDramaChannel.ca" group-title="CA" tvg-language="eng" tvg-quality="480i",CTVDramaChannel.ca
+http://40.160.24.52/DISCOVERY_SCIENCE_HD/index.m3u8
 
 #EXTINF:-1 tvg-id="CTVLifeChannel.ca" group-title="CA" tvg-language="eng" tvg-quality="480i",CTVLifeChannel.ca
 http://185.246.209.113/ANIMALPLANETHD/index.m3u8
@@ -7971,6 +7989,9 @@ https://d1bl6tskrpq9ze.cloudfront.net/hls/master.m3u8?ads.xumo_channelId=9998400
 
 #EXTINF:-1 tvg-id="NBCNewsNOW.us" group-title="US, UK" tvg-language="eng" tvg-quality="1080i",NBCNewsNOW.us
 https://livehub-voidnet.onrender.com/cluster/streamcore/us/NBC_REDIS.m3u8
+
+#EXTINF:-1 tvg-id="NBCNewsNOW.us" group-title="US, UK" tvg-language="eng" tvg-quality="1080i",NBCNewsNOW.us
+http://40.160.24.53/NBC_NEWS_NOW/index.m3u8
 
 #EXTINF:-1 tvg-id="NBCNewsNOW.us" group-title="US, UK" tvg-language="eng" tvg-quality="1080i",NBCNewsNOW.us
 https://jmp2.uk/plu-5df97894467dfa00091c873c.m3u8

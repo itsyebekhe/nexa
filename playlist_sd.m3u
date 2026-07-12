@@ -437,6 +437,9 @@ https://d1gldweznovt26.cloudfront.net/Accuweather.m3u8
 #EXTINF:-1 tvg-id="AccuWeatherNOW.us" group-title="US" tvg-language="eng" tvg-quality="480i",AccuWeatherNOW.us
 https://accuweather-xumo.amagi.tv/playlist.m3u8
 
+#EXTINF:-1 tvg-id="AceTV.us" group-title="US" tvg-language="eng" tvg-quality="576i",AceTV.us
+https://c.streamhoster.com/link/hls/W5s3fS/inLo5pcsHjo/iqg9wps0m1x_5/playlist.m3u8
+
 #EXTINF:-1 tvg-id="ACLCornholeTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",ACLCornholeTV.us
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
 https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/acl-cornhole-tv/aclco.m3u8?ads.vf=Sl3XhzpgcOy
@@ -531,6 +534,9 @@ https://install.akctvcontrol.com/speed/broadcast/139/desktop-playlist.m3u8
 
 #EXTINF:-1 tvg-id="AKCTVPuppies.us" group-title="US" tvg-language="eng" tvg-quality="480i",AKCTVPuppies.us
 https://install.akctvcontrol.com/speed/broadcast/140/desktop-playlist.m3u8
+
+#EXTINF:-1 tvg-id="AlabamaWeatherNetwork.us" group-title="US" tvg-language="eng" tvg-quality="576i",AlabamaWeatherNetwork.us
+https://alwxnet-ott-proxy.cloud9streaming.com/alwxnet/live/playlist.m3u8
 
 #EXTINF:-1 tvg-id="AlArabiyaEnglish.sa" group-title="SA, r/ARAB" tvg-language="eng" tvg-quality="576i",AlArabiyaEnglish.sa
 https://live.alarabiya.net/alarabiapublish/english/playlist_dvr.m3u8
@@ -756,6 +762,9 @@ https://dokagents.site/live/amc/mono.m3u8
 #EXTINF:-1 tvg-id="AMCEurope.uk" group-title="UK" tvg-language="eng" tvg-quality="576i",AMCEurope.uk
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.3
 https://dokagents.site/live/amc/mono.m3u8
+
+#EXTINF:-1 tvg-id="AMCPlus.us" group-title="US" tvg-language="eng" tvg-quality="480i",AMCPlus.us
+http://40.160.24.52/AMC_PLUS/index.m3u8
 
 #EXTINF:-1 tvg-id="AmericanHorrors.us" group-title="US" tvg-language="eng" tvg-quality="480i",AmericanHorrors.us
 http://107.167.7.162:8081/playlist/amhor/playlist.m3u8
@@ -1073,6 +1082,9 @@ https://aegis-cloudfront-1.tubi.video/0a019247-55a2-4b3e-8b62-b84c9cbd5b12/playl
 #EXTINF:-1 tvg-id="AniplusAsia.sg" group-title="r/SEA" tvg-language="eng" tvg-quality="576i",AniplusAsia.sg
 https://amg18481-amg18481c1-amgplt0352.playout.now3.amagi.tv/playlist/amg18481-amg18481c1-amgplt0352/playlist.m3u8
 
+#EXTINF:-1 tvg-id="AntennaTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",AntennaTV.us
+http://40.160.24.52/ANTENNA_TV/index.m3u8
+
 #EXTINF:-1 tvg-id="AnthonyBourdainPartsUnknown.us" group-title="UK" tvg-language="eng" tvg-quality="576i",AnthonyBourdainPartsUnknown.us
 https://jmp2.uk/plu-69173ce8abd4703b27f71d44.m3u8
 
@@ -1190,6 +1202,9 @@ https://linear-900.frequency.stream/dist/cineverse/900/hls/master/playlist.m3u8
 
 #EXTINF:-1 tvg-id="Aspire.us" group-title="US" tvg-language="eng" tvg-quality="480i",Aspire.us
 http://206.212.244.63/10/index.m3u8
+
+#EXTINF:-1 tvg-id="Aspire.us" group-title="US" tvg-language="eng" tvg-quality="480i",Aspire.us
+http://40.160.24.52/ASPIRE/index.m3u8
 
 #EXTINF:-1 tvg-id="AtHomewithFamilyHandyman.us" group-title="US" tvg-language="eng" tvg-quality="480i",AtHomewithFamilyHandyman.us
 https://d1ik2p49apxqjf.cloudfront.net/playlist.m3u8
@@ -1853,6 +1868,15 @@ http://81.15.109.89:8001/play/BBCFirst
 #EXTINF:-1 tvg-id="BBCFirst.uk" group-title="TR" tvg-language="eng" tvg-quality="576i",BBCFirst.uk
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.3
 http://81.15.109.89:8001/play/BBCFirst
+
+#EXTINF:-1 tvg-id="BBCFirst.uk" group-title="AU" tvg-language="eng" tvg-quality="576i",BBCFirst.uk
+http://91.146.94.234:10001/play/a087
+
+#EXTINF:-1 tvg-id="BBCFirst.uk" group-title="r/BENELUX" tvg-language="eng" tvg-quality="576i",BBCFirst.uk
+http://91.146.94.234:10001/play/a087
+
+#EXTINF:-1 tvg-id="BBCFirst.uk" group-title="TR" tvg-language="eng" tvg-quality="576i",BBCFirst.uk
+http://91.146.94.234:10001/play/a087
 
 #EXTINF:-1 tvg-id="BBCFood.us" group-title="US" tvg-language="eng" tvg-quality="480i",BBCFood.us
 https://d1e9r0b71zfwk7.cloudfront.net/playlist.m3u8
@@ -3924,6 +3948,39 @@ http://206.212.244.63/22/index.m3u8
 http://206.212.244.63/22/index.m3u8
 
 #EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/AFR" tvg-language="eng" tvg-quality="480i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/APAC" tvg-language="eng" tvg-quality="576i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/APAC" tvg-language="eng" tvg-quality="576i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="AU" tvg-language="eng" tvg-quality="576i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/EMEA" tvg-language="eng" tvg-quality="576i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/EUR" tvg-language="eng" tvg-quality="576i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/MIDEAST" tvg-language="eng" tvg-quality="576i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/WW" tvg-language="eng" tvg-quality="2160p",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",BloombergTV.us
+http://40.160.24.52/BLOOMBERG/index.m3u8
+
+#EXTINF:-1 tvg-id="BloombergTV.us" group-title="r/AFR" tvg-language="eng" tvg-quality="480i",BloombergTV.us
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
 https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bloomberg-television/bloombergtv.m3u8?ads.vf=XfUcpFmGLda
 
@@ -4073,6 +4130,9 @@ https://streamfi-alphadgtl1.zettawiseroutes.com:8181/hls/stream.m3u8
 #EXTINF:-1 tvg-id="BukeddeTV2.ug" group-title="UG" tvg-language="eng" tvg-quality="576i",BukeddeTV2.ug
 https://stream.hydeinnovations.com/bukedde2flussonic/index.m3u8
 
+#EXTINF:-1 tvg-id="BusinessRockstars.us" group-title="US" tvg-language="eng" tvg-quality="480i",BusinessRockstars.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2220
+
 #EXTINF:-1 tvg-id="BUTV10.us" group-title="ct/USBOS" tvg-language="eng" tvg-quality="480i",BUTV10.us
 https://cdnapisec.kaltura.com/p/2184561/sp/218456100/playManifest/entryId/1_68qxw4eu/format/applehttp/a.m3u8
 
@@ -4081,6 +4141,9 @@ http://206.212.244.63/27/index.m3u8
 
 #EXTINF:-1 tvg-id="Buzzr.us" group-title="US" tvg-language="eng" tvg-quality="480i",Buzzr.us
 http://23.237.104.106:8080/USA_BUZZR/index.m3u8
+
+#EXTINF:-1 tvg-id="Buzzr.us" group-title="US" tvg-language="eng" tvg-quality="480i",Buzzr.us
+http://40.160.24.52/BUZZR/index.m3u8
 
 #EXTINF:-1 tvg-id="Buzzr.us" group-title="US" tvg-language="eng" tvg-quality="480i",Buzzr.us
 https://buzzrota-ono.amagi.tv/playlist.m3u8
@@ -4442,6 +4505,9 @@ https://dash3.antik.sk/live/test_cgtn_doc/playlist.m3u8
 #EXTINF:-1 tvg-id="CGTNDocumentary.cn" group-title="r/AMER, r/EMEA, r/APAC" tvg-language="eng" tvg-quality="576i",CGTNDocumentary.cn
 https://global.cgtn.cicc.media.caton.cloud/master/cgtn-documentary.m3u8
 
+#EXTINF:-1 tvg-id="CGTNDocumentary.cn" group-title="r/AMER, r/EMEA, r/APAC" tvg-language="eng" tvg-quality="576i",CGTNDocumentary.cn
+https://hc9lby9bzw8zcar.wcetv.com/hls/cgtnd.m3u8
+
 #EXTINF:-1 tvg-id="CGTNEurope.uk" group-title="r/EUR" tvg-language="eng" tvg-quality="576i",CGTNEurope.uk
 https://raw.githubusercontent.com/Sibprod/streams/main/ressources/dm/py/hls/cgtneurope.m3u8
 
@@ -4777,6 +4843,9 @@ http://206.212.244.63/41/index.m3u8
 #EXTINF:-1 tvg-id="CNBC.us" group-title="US" tvg-language="eng" tvg-quality="480i",CNBC.us
 http://cdn.haititivi.com/CNBC/index.m3u8
 
+#EXTINF:-1 tvg-id="CNBC.us" group-title="US" tvg-language="eng" tvg-quality="480i",CNBC.us
+http://40.160.24.52/CNBC/index.m3u8
+
 #EXTINF:-1 tvg-id="CNBCAsia.sg" group-title="r/APAC" tvg-language="eng" tvg-quality="576i",CNBCAsia.sg
 https://liveh34.vtvprime.vn/hls/CNBC/03.m3u8
 
@@ -4794,6 +4863,9 @@ https://amg01079-nbcuuk-amg01079c2-samsung-gb-1258.playouts.now.amagi.tv/playlis
 
 #EXTINF:-1 tvg-id="CNBCWorld.us" group-title="r/NORAM" tvg-language="eng" tvg-quality="480i",CNBCWorld.us
 http://206.212.244.63/42/index.m3u8
+
+#EXTINF:-1 tvg-id="CNBCWorld.us" group-title="r/NORAM" tvg-language="eng" tvg-quality="480i",CNBCWorld.us
+http://40.160.24.52/CNBC_WORLD/index.m3u8
 
 #EXTINF:-1 tvg-id="ColdCaseFiles.us" group-title="US" tvg-language="eng" tvg-quality="480i",ColdCaseFiles.us
 https://pb-ab2qxzv3xf291.akamaized.net/Cold_Case_Files.m3u8
@@ -4872,6 +4944,9 @@ https://aegis-cloudfront-1.tubi.video/03cfa38e-ff8b-4e52-8fd2-084636c0c043/playl
 
 #EXTINF:-1 tvg-id="ComedyDynamics.us" group-title="US" tvg-language="eng" tvg-quality="480i",ComedyDynamics.us
 https://linear-903.frequency.stream/dist/xumo/903/hls/master/playlist.m3u8
+
+#EXTINF:-1 tvg-id="ComedyTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",ComedyTV.us
+http://40.160.24.52/COMEDY_TV/index.m3u8
 
 #EXTINF:-1 tvg-id="Comet.us" group-title="US" tvg-language="eng" tvg-quality="480i",Comet.us
 https://fast-channels.sinclairstoryline.com/COMET/index.m3u8
@@ -5023,6 +5098,9 @@ https://5d12bc59c4748.streamlock.net/redirect/csat.tv/csat.smil?type=m3u8
 #EXTINF:-1 tvg-id="CSI.us" group-title="US" tvg-language="eng" tvg-quality="480i",CSI.us
 https://jmp2.uk/plu-5efbd29e4aa26700076c0d06.m3u8
 
+#EXTINF:-1 tvg-id="CSPAN2.us" group-title="US" tvg-language="eng" tvg-quality="480i",CSPAN2.us
+http://40.160.24.52/C-SPAN_2/index.m3u8
+
 #EXTINF:-1 tvg-id="CTBPerth.au" group-title="AU" tvg-language="eng" tvg-quality="576i",CTBPerth.au
 https://live.ctbperth.net.au/hls/0/stream.m3u8
 
@@ -5064,6 +5142,15 @@ https://livestream.telvue.com/cvtv2/f7b44cfafd5c52223d5498196c8a2e7b.sdp/playlis
 
 #EXTINF:-1 tvg-id="CVTVChannel194.us" group-title="ct/USVBR" tvg-language="eng" tvg-quality="480i",CVTVChannel194.us
 https://livestream.telvue.com/cvtv1/f7b44cfafd5c52223d5498196c8a2e7b.sdp/playlist.m3u8
+
+#EXTINF:-1 tvg-id="CW.us" group-title="US" tvg-language="eng" tvg-quality="480i",CW.us
+http://40.160.24.52/CW/index.m3u8
+
+#EXTINF:-1 tvg-id="CW.us" group-title="US" tvg-language="eng" tvg-quality="480i",CW.us
+http://40.160.24.52/CW/index.m3u8
+
+#EXTINF:-1 tvg-id="CW.us" group-title="US" tvg-language="eng" tvg-quality="480i",CW.us
+http://40.160.24.52/CW/index.m3u8
 
 #EXTINF:-1 tvg-id="CypressChannel36.us" group-title="ct/USCYQ" tvg-language="eng" tvg-quality="480i",CypressChannel36.us
 https://livestream-us-east-edge-2.granicusops.com/live/cypressca/live-1-a/playlist.m3u8
@@ -5118,6 +5205,9 @@ https://aegis-cloudfront-1.tubi.video/240e3917-5be6-4a26-a1a2-878c9d40b5cf/maste
 
 #EXTINF:-1 tvg-id="DaystarTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",DaystarTV.us
 https://live-mcl.cdn01.net/smarttv/48vy43564/playlist.m3u8
+
+#EXTINF:-1 tvg-id="DaystarTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",DaystarTV.us
+http://40.160.24.52/DAYSTAR_TV/index.m3u8
 
 #EXTINF:-1 tvg-id="DaystarTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",DaystarTV.us
 https://hls-live-media-gc.cdn01.net/mpegts/232076_2222904/ApFvejWjRVUzPbyYzS8d9g/1776816000/master_mpegts.m3u8
@@ -5472,6 +5562,9 @@ https://d6lk10bkdgfae.cloudfront.net/playlist.m3u8
 #EXTINF:-1 tvg-id="DunamisTV.ng" group-title="NG" tvg-language="eng" tvg-quality="576i",DunamisTV.ng
 https://atechgroupuk.site/DTV.m3u8
 
+#EXTINF:-1 tvg-id="DungeonTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",DungeonTV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2226
+
 #EXTINF:-1 tvg-id="DUST.us" group-title="r/AMER, r/EMEA, r/APAC" tvg-language="eng" tvg-quality="480i",DUST.us
 https://dqi7ayt2o24fn.cloudfront.net/playlist.m3u8
 
@@ -5510,6 +5603,18 @@ http://23.237.104.106:8080/USA_E/index.m3u8
 
 #EXTINF:-1 tvg-id="E.us" group-title="US" tvg-language="eng" tvg-quality="480i",E.us
 http://23.237.104.106:8080/USA_E/index.m3u8
+
+#EXTINF:-1 tvg-id="E.us" group-title="US" tvg-language="eng" tvg-quality="480i",E.us
+http://40.160.24.52/E_ENTERTAINMENT_EAST/index.m3u8
+
+#EXTINF:-1 tvg-id="E.us" group-title="US" tvg-language="eng" tvg-quality="480i",E.us
+http://40.160.24.52/E_ENTERTAINMENT_EAST/index.m3u8
+
+#EXTINF:-1 tvg-id="E.us" group-title="US" tvg-language="eng" tvg-quality="480i",E.us
+http://40.160.24.52/E_ENTERTAINMENT_WEST/index.m3u8
+
+#EXTINF:-1 tvg-id="E.us" group-title="US" tvg-language="eng" tvg-quality="480i",E.us
+http://40.160.24.52/E_ENTERTAINMENT_WEST/index.m3u8
 
 #EXTINF:-1 tvg-id="EACNewsTV.kh" group-title="KH" tvg-language="eng" tvg-quality="576i",EACNewsTV.kh
 https://live-evg17.tv360.metfone.com.kh/LiveApp/streams/eacnews.m3u8
@@ -5553,6 +5658,9 @@ https://enterbcef94b.airspace-cdn.cbsivideo.com/master.m3u8
 
 #EXTINF:-1 tvg-id="EntertainmentTonight.us" group-title="US" tvg-language="eng" tvg-quality="480i",EntertainmentTonight.us
 https://jmp2.uk/plu-5dc0c78281eddb0009a02d5e.m3u8
+
+#EXTINF:-1 tvg-id="EntrepreneurTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",EntrepreneurTV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2506
 
 #EXTINF:-1 tvg-id="EntrepreneurTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",EntrepreneurTV.us
 https://cineverse-entrepreneurtv-entrepreneurtv-1-us.ono.wurl.tv/playlist.m3u8
@@ -6031,6 +6139,9 @@ https://edge-f.swagit.com/live/fernandinabeachfl/live-1-a/playlist.m3u8
 #EXTINF:-1 tvg-id="FETV.us" group-title="US" tvg-language="eng" tvg-quality="480i",FETV.us
 http://206.212.244.63/60/index.m3u8
 
+#EXTINF:-1 tvg-id="FETV.us" group-title="US" tvg-language="eng" tvg-quality="480i",FETV.us
+http://40.160.24.52/FETV/index.m3u8
+
 #EXTINF:-1 tvg-id="FEVATV.ca" group-title="CA" tvg-language="eng" tvg-quality="480i",FEVATV.ca
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0
 https://d21x3vavxu7p2x.cloudfront.net/v1/master/9d062541f2ff39b5c0f48b743c6411d25f62fc25/DistroTV-MuxIP-FEVATV/416.m3u8?ads.vf=nn5CUAdOxVu
@@ -6217,6 +6328,9 @@ https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_010/Stream/playlist.m3u
 
 #EXTINF:-1 tvg-id="FlicksofFury.us" group-title="US" tvg-language="eng" tvg-quality="480i",FlicksofFury.us
 https://jmp2.uk/plu-58e55b14ad8e9c364d55f717.m3u8
+
+#EXTINF:-1 tvg-id="Flix.us" group-title="US" tvg-language="eng" tvg-quality="480i",Flix.us
+http://40.160.24.52/FLIX/index.m3u8
 
 #EXTINF:-1 tvg-id="FNX.us" group-title="US" tvg-language="eng" tvg-quality="480i",FNX.us
 https://fnx.lls.pbs.org/index.m3u8
@@ -6461,6 +6575,9 @@ https://edge.fstv-live-linear-channel.top.comcast.net/Content/HLS_HLSv3/Live/cha
 #EXTINF:-1 tvg-id="FreeSpeechTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",FreeSpeechTV.us
 https://na.linear.zype.com/f2f02a72-71d0-45f3-829f-4ae51f721102/86ef0177-697d-41c4-be57-c4d1a2b83cad-hls4/live.m3u8
 
+#EXTINF:-1 tvg-id="FrightFlix.us" group-title="US" tvg-language="eng" tvg-quality="480i",FrightFlix.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2229
+
 #EXTINF:-1 tvg-id="FTFSports.us" group-title="US" tvg-language="eng" tvg-quality="480i",FTFSports.us
 https://1657061170.rsc.cdn77.org/HLS/FTF-LINEAR.m3u8
 
@@ -6559,6 +6676,9 @@ https://stream.castr.com/6463248048d6cd3e143655b2/live_43351ad0f3b411ed81c78fcc3
 
 #EXTINF:-1 tvg-id="GalaxyTV.ug" group-title="UG" tvg-language="eng" tvg-quality="576i",GalaxyTV.ug
 https://livestream.galaxytv.ug/jikonkone/playlist.m3u8
+
+#EXTINF:-1 tvg-id="GalxyTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",GalxyTV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2230
 
 #EXTINF:-1 tvg-id="GamePlus.ca" group-title="CA" tvg-language="eng" tvg-quality="480i",GamePlus.ca
 https://a-cdn.klowdtv.com/live2/fntsy_720p/playlist.m3u8
@@ -6865,8 +6985,14 @@ http://206.212.244.63/81/index.m3u8
 #EXTINF:-1 tvg-id="GreatAmericanFamily.us" group-title="US" tvg-language="eng" tvg-quality="480i",GreatAmericanFamily.us
 http://40.160.24.58/GAC_FAMILY/index.m3u8
 
+#EXTINF:-1 tvg-id="GreatAmericanFamily.us" group-title="US" tvg-language="eng" tvg-quality="480i",GreatAmericanFamily.us
+http://40.160.24.52/GREAT_AMERICAN_COUNTRY/index.m3u8
+
 #EXTINF:-1 tvg-id="GreatEntertainmentTelevision.us" group-title="US" tvg-language="eng" tvg-quality="480i",GreatEntertainmentTelevision.us
 http://206.212.244.63/80/index.m3u8
+
+#EXTINF:-1 tvg-id="GreatEntertainmentTelevision.us" group-title="US" tvg-language="eng" tvg-quality="480i",GreatEntertainmentTelevision.us
+http://40.160.24.52/GetTV/index.m3u8
 
 #EXTINF:-1 tvg-id="GreatEntertainmentTelevision.us" group-title="US" tvg-language="eng" tvg-quality="480i",GreatEntertainmentTelevision.us
 https://a-cdn.klowdtv.com/live2/greattv_720p/playlist.m3u8
@@ -8229,6 +8355,12 @@ http://40.160.24.58/LIFETIME_REAL_WOMEN/index.m3u8
 #EXTINF:-1 tvg-id="LifevisionTV.us" group-title="ct/USDAB" tvg-language="eng" tvg-quality="480i",LifevisionTV.us
 https://tgn.bozztv.com/lifevision/lifevision/index.m3u8
 
+#EXTINF:-1 tvg-id="LindellTV.us" group-title="US" tvg-language="eng" tvg-quality="576i",LindellTV.us
+https://stream.vocl.com/hls/lindelltv/index.m3u8
+
+#EXTINF:-1 tvg-id="LindellTV.us" group-title="US" tvg-language="eng" tvg-quality="576i",LindellTV.us
+https://rumble.com/live-hls/6v67mu/playlist.m3u8
+
 #EXTINF:-1 tvg-id="LittleGuyanaTV.us" group-title="US, GY" tvg-language="eng" tvg-quality="480i",LittleGuyanaTV.us
 https://video1.getstreamhosting.com:1936/8122/8122/playlist.m3u8
 
@@ -9046,6 +9178,9 @@ https://d1bl6tskrpq9ze.cloudfront.net/hls/master.m3u8?ads.xumo_channelId=9998400
 https://livehub-voidnet.onrender.com/cluster/streamcore/us/NBC_REDIS.m3u8
 
 #EXTINF:-1 tvg-id="NBCNewsNOW.us" group-title="US, UK" tvg-language="eng" tvg-quality="480i",NBCNewsNOW.us
+http://40.160.24.53/NBC_NEWS_NOW/index.m3u8
+
+#EXTINF:-1 tvg-id="NBCNewsNOW.us" group-title="US, UK" tvg-language="eng" tvg-quality="480i",NBCNewsNOW.us
 https://jmp2.uk/plu-5df97894467dfa00091c873c.m3u8
 
 #EXTINF:-1 tvg-id="NBCNewsNOW.us" group-title="US, UK" tvg-language="eng" tvg-quality="480i",NBCNewsNOW.us
@@ -9499,6 +9634,9 @@ https://lightning-now90s-rakuten.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="NRBTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",NRBTV.us
 https://uni6rtmp.tulix.tv/nrbnetwork/myStream.sdp/playlist.m3u8
 
+#EXTINF:-1 tvg-id="NRBTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",NRBTV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=15811
+
 #EXTINF:-1 tvg-id="NTAInternational.ng" group-title="NG" tvg-language="eng" tvg-quality="576i",NTAInternational.ng
 https://api.visionip.tv/live/ASHTTP/visiontvuk-entertainment-ntai-hsslive-25f-4x3-MB/playlist.m3u8
 
@@ -9731,6 +9869,12 @@ http://206.212.244.63/134/index.m3u8
 
 #EXTINF:-1 tvg-id="Ovation.us" group-title="US" tvg-language="eng" tvg-quality="480i",Ovation.us
 http://40.160.24.55/OVATION/index.m3u8
+
+#EXTINF:-1 tvg-id="OvercomersTV.us" group-title="US" tvg-language="eng" tvg-quality="576i",OvercomersTV.us
+https://glorystartv.live/Overcomers/index.m3u8
+
+#EXTINF:-1 tvg-id="OvercomersTV.us" group-title="US" tvg-language="eng" tvg-quality="576i",OvercomersTV.us
+https://rumble.com/live-hls/79qjh2/playlist.m3u8
 
 #EXTINF:-1 tvg-id="Oxygen.us" group-title="US" tvg-language="eng" tvg-quality="480i",Oxygen.us
 http://198.58.104.90:8989/oxygen/index.m3u8
@@ -10460,6 +10604,18 @@ http://45.162.231.38:7779/RAI/index.m3u8
 http://45.162.231.38:7779/RAI/index.m3u8
 
 #EXTINF:-1 tvg-id="RaiItalia.it" group-title="r/AMER, r/LATAM" tvg-language="eng" tvg-quality="576i",RaiItalia.it
+http://103.137.83.62:9090/play/55/index.m3u8
+
+#EXTINF:-1 tvg-id="RaiItalia.it" group-title="r/SEA" tvg-language="eng" tvg-quality="576i",RaiItalia.it
+http://103.137.83.62:9090/play/55/index.m3u8
+
+#EXTINF:-1 tvg-id="RaiItalia.it" group-title="AU, NZ" tvg-language="eng" tvg-quality="576i",RaiItalia.it
+http://103.137.83.62:9090/play/55/index.m3u8
+
+#EXTINF:-1 tvg-id="RaiItalia.it" group-title="r/EUR, r/AFR" tvg-language="eng" tvg-quality="576i",RaiItalia.it
+http://103.137.83.62:9090/play/55/index.m3u8
+
+#EXTINF:-1 tvg-id="RaiItalia.it" group-title="r/AMER, r/LATAM" tvg-language="eng" tvg-quality="576i",RaiItalia.it
 http://315e5a5d.ottrast.com/iptv/MM4E93NGF5LADZ/19093/index.m3u8
 
 #EXTINF:-1 tvg-id="RaiItalia.it" group-title="r/SEA" tvg-language="eng" tvg-quality="576i",RaiItalia.it
@@ -10946,6 +11102,9 @@ https://sabctwota.cdn.mangomolo.com/sabc2/smil:sabc2.stream.smil/master.m3u8
 #EXTINF:-1 tvg-id="SABCNews.za" group-title="ZA" tvg-language="eng" tvg-quality="576i",SABCNews.za
 https://sabconetanw.cdn.mangomolo.com/news/smil:news.stream.smil/master.m3u8
 
+#EXTINF:-1 tvg-id="SalemNewsChannel.us" group-title="US" tvg-language="eng" tvg-quality="576i",SalemNewsChannel.us
+https://amg00732-salemmediagroup-snc-ono-ekp8j.amagi.tv/playlist/amg00732-salemmediagroup-snc-ono/playlist.m3u8
+
 #EXTINF:-1 tvg-id="SalvationTV.in" group-title="IN" tvg-language="eng" tvg-quality="576i",SalvationTV.in
 https://ktismaservers.in:3902/live/salvationtvlive.m3u8
 
@@ -10984,6 +11143,9 @@ https://w6oy7x7jlxrg-hls-live.5centscdn.com/MandETV/955ad3298db330b5ee880c2c9e6f
 
 #EXTINF:-1 tvg-id="ScottsdaleChannel11.us" group-title="ct/USSTZ" tvg-language="eng" tvg-quality="480i",ScottsdaleChannel11.us
 https://cdn3.wowza.com/5/RXJNMFI3VlVkOEFP/scottsdale/G0040_007/chunklist.m3u8
+
+#EXTINF:-1 tvg-id="ScreenDreams.us" group-title="US" tvg-language="eng" tvg-quality="480i",ScreenDreams.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2240
 
 #EXTINF:-1 tvg-id="ScrippsNews.us" group-title="US" tvg-language="eng" tvg-quality="480i",ScrippsNews.us
 http://40.160.24.53/SCRIPPS_NEWS/index.m3u8
@@ -11182,6 +11344,9 @@ http://40.160.24.55/SLICE/index.m3u8
 #EXTINF:-1 tvg-id="SLOCountyChannel21.us" group-title="ct/USMJK" tvg-language="eng" tvg-quality="480i",SLOCountyChannel21.us
 https://agp-nimble.streamguys1.com/SLOC/SLOC/playlist.m3u8
 
+#EXTINF:-1 tvg-id="SlopesTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",SlopesTV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2241
+
 #EXTINF:-1 tvg-id="SmartLifeStyleTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",SmartLifeStyleTV.us
 https://brightstar-sls-pull-secure.akamaized.net/brightstarsls/stream.m3u8
 
@@ -11208,6 +11373,9 @@ http://40.160.24.55/SMITHSONIAN/index.m3u8
 
 #EXTINF:-1 tvg-id="SmithsonianChannelSelects.us" group-title="US" tvg-language="eng" tvg-quality="480i",SmithsonianChannelSelects.us
 https://jmp2.uk/plu-5f21ea08007a49000762d349.m3u8
+
+#EXTINF:-1 tvg-id="SonicTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",SonicTV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=16764
 
 #EXTINF:-1 tvg-id="SoReal.us" group-title="UK" tvg-language="eng" tvg-quality="576i",SoReal.us
 https://all3media-soreal-1-gb.samsung.wurl.tv/playlist.m3u8
@@ -11775,12 +11943,6 @@ https://streamvidex.qzz.io/videx/telemundo/index.m3u8
 
 #EXTINF:-1 tvg-id="Telemundo.us" group-title="US" tvg-language="eng" tvg-quality="480i",Telemundo.us
 https://streamvidex.qzz.io/videx/telemundo/index.m3u8
-
-#EXTINF:-1 tvg-id="Telemundo.us" group-title="US" tvg-language="eng" tvg-quality="480i",Telemundo.us
-http://177.245.131.133:8080/telemundo/index.m3u8
-
-#EXTINF:-1 tvg-id="Telemundo.us" group-title="US" tvg-language="eng" tvg-quality="480i",Telemundo.us
-http://177.245.131.133:8080/telemundo/index.m3u8
 
 #EXTINF:-1 tvg-id="TelemundoTelenovelasClasicas.us" group-title="US" tvg-language="eng" tvg-quality="480i",TelemundoTelenovelasClasicas.us
 https://jmp2.uk/plu-5cf96cc422df39f1a338d165.m3u8
@@ -12857,21 +13019,6 @@ http://185.246.209.113/T+E/index.m3u8
 https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/trace-latina/encrypted.m3u8?ads.vf=8rE20DsHHI0
 
 #EXTINF:-1 tvg-id="TraceSportStars.fr" group-title="r/EU" tvg-language="eng" tvg-quality="576i",TraceSportStars.fr
-https://lightning-tracesport-samsungau.amagi.tv/playlist.m3u8
-
-#EXTINF:-1 tvg-id="TraceSportStars.fr" group-title="r/EU" tvg-language="eng" tvg-quality="576i",TraceSportStars.fr
-http://tracesportstars-samsunges.amagi.tv/hls/amagi_hls_data_samsunguk-tracesport-samsungspain/CDN/playlist.m3u8
-
-#EXTINF:-1 tvg-id="TraceSportStars.fr" group-title="r/EU" tvg-language="eng" tvg-quality="576i",TraceSportStars.fr
-https://trace-sportstars-samsungnz.amagi.tv/playlist.m3u8
-
-#EXTINF:-1 tvg-id="TraceSportStars.fr" group-title="r/EU" tvg-language="eng" tvg-quality="576i",TraceSportStars.fr
-https://tracesportstars-klowdtv.amagi.tv/playlist.m3u8
-
-#EXTINF:-1 tvg-id="TraceSportStars.fr" group-title="r/EU" tvg-language="eng" tvg-quality="576i",TraceSportStars.fr
-https://amg01131-tracetv-amg01131c2-stirr-us-4392.playouts.now.amagi.tv/playlist.m3u8
-
-#EXTINF:-1 tvg-id="TraceSportStars.fr" group-title="r/EU" tvg-language="eng" tvg-quality="576i",TraceSportStars.fr
 http://ott.watch/XE5QWWBZ87/256/tracks-v1a1/mono.ts.m3u8
 
 #EXTINF:-1 tvg-id="TraceSportStars.fr" group-title="r/EU" tvg-language="eng" tvg-quality="576i",TraceSportStars.fr
@@ -13020,6 +13167,9 @@ https://engbrics.mediacdn.ru/cdn/brics/english/playlist.m3u8
 
 #EXTINF:-1 tvg-id="TVC.ng" group-title="NG" tvg-language="eng" tvg-quality="576i",TVC.ng
 https://tvce.gridpapaservers.com/TVCSEPT/ngrp:myStream_all/playlist.m3u8
+
+#EXTINF:-1 tvg-id="TVC.ng" group-title="NG" tvg-language="eng" tvg-quality="576i",TVC.ng
+http://212.5.144.156:8080/tvc/index.m3u8
 
 #EXTINF:-1 tvg-id="TVCNews.ng" group-title="NG" tvg-language="eng" tvg-quality="576i",TVCNews.ng
 http://69.64.57.208/tvcnews/playlist.m3u8
@@ -13556,9 +13706,6 @@ http://315e5a5d.ottrast.com/iptv/8XFKA8883W9M5K/12084/index.m3u8
 #EXTINF:-1 tvg-id="VibesMedia.bz" group-title="BZ" tvg-language="eng" tvg-quality="480i",VibesMedia.bz
 https://streamer2.nexgen.bz/09-POSVIBES/index.m3u8
 
-#EXTINF:-1 tvg-id="ViceNews.us" group-title="US" tvg-language="eng" tvg-quality="480i",ViceNews.us
-https://vicetv-vicefast2-firetv.amagi.tv/playlist.m3u8
-
 #EXTINF:-1 tvg-id="VICETV.us" group-title="US" tvg-language="eng" tvg-quality="480i",VICETV.us
 http://23.237.104.106:8080/USA_VICETV/index.m3u8
 
@@ -13640,6 +13787,12 @@ https://aegis-cloudfront-1.tubi.video/d5171dc7-f8c6-469c-81eb-e1ffaaed5721/playl
 
 #EXTINF:-1 tvg-id="WapTV.ng" group-title="NG" tvg-language="eng" tvg-quality="576i",WapTV.ng
 https://newproxy3.vidivu.tv/waptv/index.m3u8
+
+#EXTINF:-1 tvg-id="WatchitKID.us" group-title="US" tvg-language="eng" tvg-quality="480i",WatchitKID.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2245
+
+#EXTINF:-1 tvg-id="WatchitScream.us" group-title="US" tvg-language="eng" tvg-quality="480i",WatchitScream.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2246
 
 #EXTINF:-1 tvg-id="WAVETV.bz" group-title="BZ" tvg-language="eng" tvg-quality="480i",WAVETV.bz
 https://streamer2.nexgen.bz/08-WAVE/index.m3u8
@@ -14115,6 +14268,9 @@ https://0888934ec1a5.us-east-1.playback.live-video.net/api/video/v1/us-east-1.28
 #EXTINF:-1 tvg-id="WWONTVChannel48.us" group-title="s/US-NY" tvg-language="eng" tvg-quality="480i",WWONTVChannel48.us
 https://tv2.fastcast4u.com:3943/stream/play.m3u8
 
+#EXTINF:-1 tvg-id="XFCTV.us" group-title="US" tvg-language="eng" tvg-quality="480i",XFCTV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2247
+
 #EXTINF:-1 tvg-id="XITEReggaeVibes.nl" group-title="NL, US" tvg-language="eng" tvg-quality="576i",XITEReggaeVibes.nl
 https://dw2m7yrngfg8c.cloudfront.net/XITE_Reggae_Vibes.m3u8
 
@@ -14204,6 +14360,9 @@ https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8
 
 #EXTINF:-1 tvg-id="YTATV.us" group-title="US" tvg-language="eng" tvg-quality="480i",YTATV.us
 https://yta.unitedteleports.tv/hls/YTA.m3u8
+
+#EXTINF:-1 tvg-id="YTATV.us" group-title="US" tvg-language="eng" tvg-quality="480i",YTATV.us
+https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=16767
 
 #EXTINF:-1 tvg-id="YuGiOh.us" group-title="US" tvg-language="eng" tvg-quality="480i",YuGiOh.us
 https://jmp2.uk/plu-63988a50be012600070f5db3.m3u8
