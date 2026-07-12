@@ -13,7 +13,7 @@ OUTPUT_SD = 'playlist_sd.m3u'
 
 # Filter settings
 TARGET_COLUMN = 'languages'
-SEARCH_TERM = 'eng' # English
+SEARCH_TERM = 'fas' # English
 
 def generate_playlist():
     print("--- Starting Process ---")
