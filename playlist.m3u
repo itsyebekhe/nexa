@@ -297,6 +297,9 @@ https://hls.iranfarda.live/hls/stream.m3u8
 https://ncdn.telewebion.ir/iraneman/live/playlist.m3u8
 
 #EXTINF:-1 tvg-id="IranInternational.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",IranInternational.uk
+https://hlspackager.akamaized.net/live/DB/IRAN_INTERNATIONAL/HLS/IRAN_INTERNATIONAL.m3u8
+
+#EXTINF:-1 tvg-id="IranInternational.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",IranInternational.uk
 https://dev-live.livetvstream.co.uk/LS-63503-4/index.m3u8
 
 #EXTINF:-1 tvg-id="IranInternational.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",IranInternational.uk
@@ -307,9 +310,6 @@ https://live.playstop.me/1816184091/index.m3u8
 
 #EXTINF:-1 tvg-id="IranInternational.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",IranInternational.uk
 https://live.playstop.me/LS-63503-4/index.m3u8
-
-#EXTINF:-1 tvg-id="IranInternational.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",IranInternational.uk
-https://hlspackager.akamaized.net/live/DB/IRAN_INTERNATIONAL/HLS/IRAN_INTERNATIONAL.m3u8
 
 #EXTINF:-1 tvg-id="IranJewishTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",IranJewishTV.ir
 http://iran620.com:1935/live/IranJewishTv/playlist.m3u8
@@ -366,7 +366,7 @@ https://ncdn.telewebion.ir/jahanbin/live/playlist.m3u8
 https://klmhls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="KalemehTV.uk" group-title="IR" tvg-language="fas" tvg-quality="576i",KalemehTV.uk
-https://kalemeh.tv/live/hls/gate.php?p=%2Flive%2Fngrp%3Akalemeh_all%2Fplaylist.m3u8
+https://kalemeh.tv/live/hls/gate.php?p=/live/ngrp:kalemeh_all/playlist.m3u8
 
 #EXTINF:-1 tvg-id="KanalJadid.uk" group-title="UK, IR" tvg-language="fas" tvg-quality="576i",KanalJadid.uk
 https://kjhls.wns.live/hls/stream.m3u8
