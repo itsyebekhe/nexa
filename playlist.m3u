@@ -290,6 +290,12 @@ https://ncdn.telewebion.ir/ilam/live/playlist.m3u8
 #EXTINF:-1 tvg-id="ImamHusseinTV1.iq" group-title="IQ" tvg-language="fas" tvg-quality="576i",ImamHusseinTV1.iq
 https://live.imamhossaintv.com/live/ih1.m3u8
 
+#EXTINF:-1 tvg-id="ImamHusseinTV1.iq" group-title="IQ" tvg-language="fas" tvg-quality="576i",ImamHusseinTV1.iq
+http://fa.imamhossaintv.com/live/ih1.m3u8
+
+#EXTINF:-1 tvg-id="ImamHusseinTV6.iq" group-title="IQ" tvg-language="fas" tvg-quality="576i",ImamHusseinTV6.iq
+http://live.imamhossaintv.com/live/ih6.m3u8
+
 #EXTINF:-1 tvg-id="IraneFardaTV.uk" group-title="US, IR" tvg-language="fas" tvg-quality="720p",IraneFardaTV.uk
 https://hls.iranfarda.live/hls/stream.m3u8
 
