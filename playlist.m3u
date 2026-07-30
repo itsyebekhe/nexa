@@ -224,9 +224,6 @@ https://ca-rt.onetv.app/gemrubix/index-0.m3u8?token=onetv202
 #EXTINF:-1 tvg-id="GEMRubixPlus.tr" group-title="IR" tvg-language="fas" tvg-quality="576i",GEMRubixPlus.tr
 https://ca-rt.onetv.app/gemrubixplus/index-0.m3u8?token=onetv202
 
-#EXTINF:-1 tvg-id="GEMSeries.tr" group-title="IR" tvg-language="fas" tvg-quality="480i",GEMSeries.tr
-https://ca-rt.onetv.app/gemseries/index-0.m3u8?token=onetv202
-
 #EXTINF:-1 tvg-id="GEMSeriesPlus.tr" group-title="IR" tvg-language="fas" tvg-quality="480i",GEMSeriesPlus.tr
 https://ca-rt.onetv.app/gemseriesplus/index-0.m3u8?token=onetv202
 
