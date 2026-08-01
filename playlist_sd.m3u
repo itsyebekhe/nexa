@@ -1,10 +1,4 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="4Music.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",4Music.fr
-https://musichls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="4Music.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",4Music.fr
-https://itthls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="4UTV.tr" group-title="TR, IR" tvg-language="fas" tvg-quality="576i",4UTV.tr
 https://hls.4utv.live/hls/stream.m3u8
 
@@ -23,41 +17,17 @@ https://ncdn.telewebion.ir/aflak/live/playlist.m3u8
 #EXTINF:-1 tvg-id="AFNTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",AFNTV.ir
 https://bozztv.com/1gbw5/tintv2/tintv2/playlist.m3u8
 
-#EXTINF:-1 tvg-id="AfraFilm.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",AfraFilm.ir
-https://afrafhls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="AfraSeries.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",AfraSeries.ir
-https://afrashls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="AftabTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",AftabTV.ir
 https://ncdn.telewebion.ir/aftab/live/playlist.m3u8
 
 #EXTINF:-1 tvg-id="AlborzTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",AlborzTV.ir
 https://ncdn.telewebion.ir/alborz/live/playlist.m3u8
 
-#EXTINF:-1 tvg-id="AlMahdiTV.us" group-title="US" tvg-language="fas" tvg-quality="480i",AlMahdiTV.us
-https://iptv.almahditv.com/almahditv/playlist.m3u8
-
 #EXTINF:-1 tvg-id="AmouzeshTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",AmouzeshTV.ir
 https://ncdn.telewebion.ir/amouzesh/live/playlist.m3u8
 
 #EXTINF:-1 tvg-id="AraTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",AraTV.ir
 https://ncdn.telewebion.ir/ara/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="AraxTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",AraxTV.ir
-https://araxhls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="ArkoTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",ArkoTV.ir
-https://arkhls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="ArvanTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",ArvanTV.ir
-https://arvhls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="ArvanTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",ArvanTV.ir
-https://me2hls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="AtrinaTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",AtrinaTV.ir
-https://atrihls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="AVAFamily.ir" group-title="IQ" tvg-language="fas" tvg-quality="576i",AVAFamily.ir
 https://familyhls.avatv.live/hls/stream.m3u8
@@ -72,27 +42,6 @@ https://avaserieshls.wns.live/hls/stream.m3u8
 https://ncdn.telewebion.ir/baran/live/playlist.m3u8
 
 #EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
-https://vs-cmaf-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2.mpd
-
-#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
-https://vs-cmaf-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2_http.mpd
-
-#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
-https://vs-cmaf-pushb-ww.live.cf.md.bbci.co.uk/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2.mpd
-
-#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
-https://vs-cmaf-pushb-ww.live.cf.md.bbci.co.uk/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2_http.mpd
-
-#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
-https://vs-hls-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/mobile_wifi_main_hd_abr_v2.m3u8
-
-#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
-https://vs-hls-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2.m3u8
-
-#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
-https://vs-hls-pushb-ww.live.cf.md.bbci.co.uk/x=4/i=urn:bbc:pips:service:bbc_persian_tv/pc_hd_abr_v2.m3u8
-
-#EXTINF:-1 tvg-id="BBCPersian.uk" group-title="UK" tvg-language="fas" tvg-quality="576i",BBCPersian.uk
 https://vs-cmaf-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_persian_tv/hevc_iptv_mse_v0.mpd
 
 #EXTINF:-1 tvg-id="BoushehrTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",BoushehrTV.ir
@@ -101,26 +50,11 @@ https://ncdn.telewebion.ir/bushehr/live/playlist.m3u8
 #EXTINF:-1 tvg-id="BravoFarsiTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",BravoFarsiTV.ir
 https://bravoohls.wns.live/hls/stream.m3u8
 
-#EXTINF:-1 tvg-id="CafeFilm.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",CafeFilm.ir
-https://cafefhls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="CafeTradeTV.ir" group-title="US, IR" tvg-language="fas" tvg-quality="480i",CafeTradeTV.ir
 https://cafetradehls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="ChannelOne.us" group-title="US" tvg-language="fas" tvg-quality="480i",ChannelOne.us
 https://pemirateshls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="ClassicTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",ClassicTV.ir
-https://clshls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="DatisTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",DatisTV.ir
-https://dathls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="DatisTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",DatisTV.ir
-https://ronhls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="DejTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",DejTV.ir
-https://rdejhls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="DenaTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",DenaTV.ir
 https://ncdn.telewebion.ir/dena/live/playlist.m3u8
@@ -133,9 +67,6 @@ https://ca-rt.onetv.app/EkranMovies/index-0.m3u8?token=onetv202
 
 #EXTINF:-1 tvg-id="Energy.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",Energy.ir
 https://ncdn.telewebion.ir/baenergy/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="EPlanetTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",EPlanetTV.ir
-https://eplhls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="ErfanHalghehTV.ca" group-title="CA, IR" tvg-language="fas" tvg-quality="480i",ErfanHalghehTV.ca
 https://hls.erfanhalgheh.live/hls/stream.m3u8
@@ -236,9 +167,6 @@ https://ca-rt.onetv.app/gem/index-0.m3u8?token=onetv202
 #EXTINF:-1 tvg-id="GEMTVPlus.tr" group-title="IR" tvg-language="fas" tvg-quality="480i",GEMTVPlus.tr
 https://ca-rt.onetv.app/gemtvplus/index-0.m3u8?token=onetv202
 
-#EXTINF:-1 tvg-id="GoldStar.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",GoldStar.ir
-https://moviethls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="GolkhaneTv.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",GolkhaneTv.ir
 https://ncdn.telewebion.ir/golkhane/live/playlist.m3u8
 
@@ -257,9 +185,6 @@ https://streamer1.connectto.com/HIGHVISION_WEB_1205/index.m3u8
 #EXTINF:-1 tvg-id="HodHodFarsiTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",HodHodFarsiTV.ir
 https://northtelecom.b-cdn.net/hodhodtv.m3u8
 
-#EXTINF:-1 tvg-id="HomePlus.ir" group-title="CN" tvg-language="fas" tvg-quality="720p",HomePlus.ir
-https://homeplushls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="ICCplus.us" group-title="IR" tvg-language="fas" tvg-quality="576i",ICCplus.us
 https://icchls.wns.live/hls/stream.m3u8
 
@@ -268,9 +193,6 @@ https://icnet1hls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="ICnet2.ca" group-title="IR" tvg-language="fas" tvg-quality="480i",ICnet2.ca
 https://icnet2hls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="icnet3.ca" group-title="IR" tvg-language="fas" tvg-quality="720p",icnet3.ca
-https://ic3hls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="iFilm2.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",iFilm2.ir
 https://live.presstv.ir/hls/ifilm2.m3u8
@@ -292,9 +214,6 @@ http://fa.imamhossaintv.com/live/ih1.m3u8
 
 #EXTINF:-1 tvg-id="ImamHusseinTV6.iq" group-title="IQ" tvg-language="fas" tvg-quality="576i",ImamHusseinTV6.iq
 http://live.imamhossaintv.com/live/ih6.m3u8
-
-#EXTINF:-1 tvg-id="IraneFardaTV.uk" group-title="US, IR" tvg-language="fas" tvg-quality="720p",IraneFardaTV.uk
-https://hls.iranfarda.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="Iraneman.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",Iraneman.ir
 https://ncdn.telewebion.ir/iraneman/live/playlist.m3u8
@@ -319,9 +238,6 @@ http://iran620.com:1935/live/IranJewishTv/playlist.m3u8
 
 #EXTINF:-1 tvg-id="IranNama.fr" group-title="IR" tvg-language="fas" tvg-quality="576i",IranNama.fr
 https://iran613hls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="IranNationalRevolutionTV.us" group-title="IR" tvg-language="fas" tvg-quality="720p",IranNationalRevolutionTV.us
-https://hls.irannrtv.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="IRIB1.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",IRIB1.ir
 https://ncdn.telewebion.ir/tv1/live/playlist.m3u8
@@ -380,14 +296,8 @@ https://ncdn.telewebion.ir/karoon/live/playlist.m3u8
 #EXTINF:-1 tvg-id="KermanTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",KermanTV.ir
 https://ncdn.telewebion.ir/kerman/live/playlist.m3u8
 
-#EXTINF:-1 tvg-id="KhabarbinTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",KhabarbinTV.ir
-https://khbhls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="KhalijeFarsTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",KhalijeFarsTV.ir
 https://ncdn.telewebion.ir/khalijefars/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="KhalijTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",KhalijTV.ir
-https://khalijhls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="KhavaranTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",KhavaranTV.ir
 https://ncdn.telewebion.ir/khavaran/live/playlist.m3u8
@@ -423,9 +333,6 @@ https://ca-rt.onetv.app/manototv/index-0.m3u8?token=onetv202
 https://livefa.marjaeyattv.com/mtv_fa/playlist.m3u8
 
 #EXTINF:-1 tvg-id="MBCPersia.ae" group-title="AE" tvg-language="fas" tvg-quality="576i",MBCPersia.ae
-https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-persia/818ee8e4b592dc497608f066d825bfb4/index.m3u8
-
-#EXTINF:-1 tvg-id="MBCPersia.ae" group-title="AE" tvg-language="fas" tvg-quality="576i",MBCPersia.ae
 https://hls.mbcpersia.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="MetaFilmTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",MetaFilmTV.ir
@@ -446,9 +353,6 @@ https://mohabathls.wns.live/hls/stream.m3u8
 #EXTINF:-1 tvg-id="MohabatTV.us" group-title="US" tvg-language="fas" tvg-quality="480i",MohabatTV.us
 http://media.mohabat.tv:1935/live_transcoder/ngrp:mohabat.stream_all/playlist.m3u8
 
-#EXTINF:-1 tvg-id="MTC.us" group-title="US" tvg-language="fas" tvg-quality="720p",MTC.us
-https://mtchls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="NamaTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",NamaTV.ir
 https://ncdn.telewebion.ir/nama/live/playlist.m3u8
 
@@ -458,17 +362,11 @@ https://ncdn.telewebion.ir/namayesh/live/playlist.m3u8
 #EXTINF:-1 tvg-id="Nasim.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",Nasim.ir
 https://ncdn.telewebion.ir/nasim/live/playlist.m3u8
 
-#EXTINF:-1 tvg-id="NationalIranianCongressTV.us" group-title="IR" tvg-language="fas" tvg-quality="720p",NationalIranianCongressTV.us
-https://tv.iraniancongress.com/stream/tv.m3u8
-
 #EXTINF:-1 tvg-id="NavahangTV.fi" group-title="FI" tvg-language="fas" tvg-quality="576i",NavahangTV.fi
 https://hls.navahang.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="NavahangTV.fi" group-title="FI" tvg-language="fas" tvg-quality="576i",NavahangTV.fi
 https://simahls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="NewFlix.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",NewFlix.ir
-https://newfhls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="NoorTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",NoorTV.ir
 https://ncdn.telewebion.ir/noor/live/playlist.m3u8
@@ -506,17 +404,8 @@ https://todayhls.wns.live/hls/stream.m3u8
 #EXTINF:-1 tvg-id="PersianaComedy.fr" group-title="IR" tvg-language="fas" tvg-quality="576i",PersianaComedy.fr
 https://comedyhls.persiana.live/hls/stream.m3u8
 
-#EXTINF:-1 tvg-id="PersianaDocs.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaDocs.fr
-https://scihls.persiana.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="PersianaFamily.fr" group-title="IR" tvg-language="fas" tvg-quality="576i",PersianaFamily.fr
 https://familyhls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaFight.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaFight.fr
-https://fighthls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaFolk.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaFolk.fr
-https://sonhls.persiana.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="PersianaIranian.fr" group-title="IR" tvg-language="fas" tvg-quality="576i",PersianaIranian.fr
 https://irhls.persiana.live/hls/stream.m3u8
@@ -524,35 +413,11 @@ https://irhls.persiana.live/hls/stream.m3u8
 #EXTINF:-1 tvg-id="PersianaJunior.fr" group-title="IR" tvg-language="fas" tvg-quality="576i",PersianaJunior.fr
 https://junhls.persiana.live/hls/stream.m3u8
 
-#EXTINF:-1 tvg-id="PersianaMedical.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaMedical.fr
-https://phd2hls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaMedical.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaMedical.fr
-https://tfnhls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="PersianaNostalgia.fr" group-title="IR" tvg-language="fas" tvg-quality="576i",PersianaNostalgia.fr
 https://noshls.persiana.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="PersianaPlus.fr" group-title="IR" tvg-language="fas" tvg-quality="576i",PersianaPlus.fr
 https://euhls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaReality.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaReality.fr
-https://twohls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaSeries.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaSeries.fr
-https://onehls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaTeen.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaTeen.fr
-https://kphls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaTravel.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaTravel.fr
-https://ptravelhls.persiana.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaTravel.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaTravel.fr
-https://mardomhls.wns.live/hls/stream.m3u8
-
-#EXTINF:-1 tvg-id="PersianaVibe.fr" group-title="IR" tvg-language="fas" tvg-quality="720p",PersianaVibe.fr
-https://raphls.persiana.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="PMC.ae" group-title="r/MENA" tvg-language="fas" tvg-quality="576i",PMC.ae
 https://pmchls.wns.live/hls/stream.m3u8
@@ -566,17 +431,11 @@ https://ncdn.telewebion.ir/pooya/live/playlist.m3u8
 #EXTINF:-1 tvg-id="PooyaTVPlus.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",PooyaTVPlus.ir
 https://ncdn.telewebion.ir/javaneh/live/playlist.m3u8
 
-#EXTINF:-1 tvg-id="PROSportInternational.my" group-title="IR" tvg-language="fas" tvg-quality="720p",PROSportInternational.my
-https://proshls.wns.live/hls/stream.m3u8
-
 #EXTINF:-1 tvg-id="QazvinTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",QazvinTV.ir
 https://ncdn.telewebion.ir/qazvin/live/playlist.m3u8
 
 #EXTINF:-1 tvg-id="QuranTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",QuranTV.ir
 https://ncdn.telewebion.ir/quran/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="RasoulallahTv.ir" group-title="IR" tvg-language="fas" tvg-quality="1080p",RasoulallahTv.ir
-https://avr.host247.net/live/rasoulallahtv/playlist.m3u8
 
 #EXTINF:-1 tvg-id="RazaviTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",RazaviTV.ir
 https://ncdn.telewebion.ir/razavi/live/playlist.m3u8
@@ -626,20 +485,11 @@ https://slonehls.wns.live/hls/stream.m3u8
 #EXTINF:-1 tvg-id="SL2.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",SL2.ir
 https://sltwohls.wns.live/hls/stream.m3u8
 
-#EXTINF:-1 tvg-id="SNNTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",SNNTV.ir
-https://live2.snn.ir/hls/snn2_hd720/index.m3u8
-
-#EXTINF:-1 tvg-id="T2Movies.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",T2Movies.ir
-https://ca-rt.onetv.app/T2Movies/index-0.m3u8?token=onetv202
-
 #EXTINF:-1 tvg-id="T2TV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",T2TV.ir
 https://t2hls.wns.live/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="TabarestanTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",TabarestanTV.ir
 https://ncdn.telewebion.ir/tabarestan/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="Tamasha.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",Tamasha.ir
-https://ncdn.telewebion.ir/hdtest/live/playlist.m3u8
 
 #EXTINF:-1 tvg-id="Tapesh2.us" group-title="US" tvg-language="fas" tvg-quality="480i",Tapesh2.us
 https://maxtvhls.wns.live/hls/stream.m3u8
@@ -700,7 +550,4 @@ https://live.yourtime.tv/hls/stream.m3u8
 
 #EXTINF:-1 tvg-id="ZagrosTV.ir" group-title="IR" tvg-language="fas" tvg-quality="576i",ZagrosTV.ir
 https://ncdn.telewebion.ir/zagros/live/playlist.m3u8
-
-#EXTINF:-1 tvg-id="ZedTV.ir" group-title="IR" tvg-language="fas" tvg-quality="720p",ZedTV.ir
-https://zedhls.wns.live/hls/stream.m3u8
 
