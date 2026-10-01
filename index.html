@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نکسا | NEXA</title>
+
+  <!-- Google Fonts: Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Hls.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: rgba(22, 29, 47, 0.75);
+      --bg-card-hover: rgba(33, 44, 71, 0.95);
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.35);
+      --accent-grad: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --danger: #ef4444;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Top Bar Header */
+    header {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      z-index: 50;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-grad);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .brand-logo svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary {
+      background: var(--accent-grad);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    .input-field {
+      background: rgba(10, 15, 29, 0.7);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 12px;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--accent);
+    }
+
+    /* Container */
+    .container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 61px);
+      position: relative;
+    }
+
+    /* Video Player */
+    .player-wrapper {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      justify-content: center;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .stream-overlay {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    .status-dot.online {
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    .status-dot.buffering {
+      background: #f59e0b;
+      animation: pulse 1s infinite;
+    }
+
+    .status-dot.error {
+      background: var(--danger);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Sidebar Channels */
+    .sidebar {
+      flex: 1;
+      max-width: 380px;
+      min-width: 300px;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .search-panel {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 6px 0;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-grad);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    /* Channel List */
+    .channel-list {
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+      padding: 8px;
+    }
+
+    .channel-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .channel-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    .channel-item {
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .channel-item:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border);
+      transform: translateX(-3px);
+    }
+
+    .channel-item.active {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--accent);
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.15);
+    }
+
+    .channel-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      overflow: hidden;
+    }
+
+    .channel-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .channel-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+
+    .badge-hd {
+      color: var(--accent);
+      border-color: rgba(6, 182, 212, 0.3);
+      background: rgba(6, 182, 212, 0.08);
+    }
+
+    .channel-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 5px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      transition: all 0.2s;
+    }
+
+    .icon-btn:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .icon-btn.is-fav {
+      color: #fbbf24;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .shortcuts-help {
+      padding: 8px 14px;
+      background: rgba(0,0,0,0.3);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 900px) {
+      .container { flex-direction: column; }
+      .sidebar {
+        max-width: 100%;
+        height: 48%;
+        border-right: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">پیوند کپی شد!</div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4z M10 8.5v7l6-3.5z"/></svg>
+      </div>
+      <div class="brand-title">تلویزیون زنده</div>
+    </div>
+
+    <div class="header-controls">
+      <!-- Preset Sources Selection -->
+      <select id="source-selector" class="input-field" style="cursor: pointer;">
+        <option value="https://raw.githubusercontent.com/itsyebekhe/nexa/refs/heads/main/playlist.m3u">منبع اصلی (Nexa فارسی)</option>
+        <option value="playlist.m3u">لیست محلی (playlist.m3u)</option>
+        <option value="playlist_hd.m3u">لیست محلی HD (playlist_hd.m3u)</option>
+        <option value="custom">سفارشی (نشانی دستی)...</option>
+      </select>
+
+      <input type="text" id="url-loader" class="input-field" placeholder="نشانی لیست M3U دلخواه..." style="display: none; width: 220px;">
+      <button class="btn btn-primary" id="btn-load-url">بارگذاری</button>
+
+      <label class="btn" for="file-loader">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+        فایل محلی
+      </label>
+      <input type="file" id="file-loader" accept=".m3u,.m3u8" style="display: none;">
+    </div>
+  </header>
+
+  <!-- Main View -->
+  <div class="container">
+    <main class="player-wrapper">
+      <div class="stream-overlay">
+        <div id="status-indicator" class="status-dot"></div>
+        <span id="now-playing-title">کانالی انتخاب نشده</span>
+      </div>
+      <video id="video-player" controls autoplay playsinline></video>
+    </main>
+
+    <aside class="sidebar">
+      <div class="search-panel">
+        <input type="text" id="search-box" class="input-field" placeholder="جستجوی نام شبکه یا شناسه...">
+        
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-tab="all">همه شبکه‌ها</button>
+          <button class="tab-btn" data-tab="favs">علاقه‌مندی‌ها ★</button>
+          <button class="tab-btn" data-tab="hd">فقط HD</button>
+        </div>
+
+        <select id="group-filter" class="input-field" style="cursor: pointer;">
+          <option value="">همه دسته‌ها</option>
+        </select>
+      </div>
+
+      <ul id="channel-list" class="channel-list"></ul>
+
+      <div class="shortcuts-help">
+        <span>میانبرها: <b>F</b> (تمام‌صفحه) | <b>M</b> (صدا)</span>
+        <span><b>N</b> / <b>P</b> (کانال بعد/قبل)</span>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    let channels = [];
+    let currentChannelIdx = -1;
+    let activeTab = 'all';
+    let currentSourceUrl = '';
+    let favorites = JSON.parse(localStorage.getItem('iptv_favorites') || '[]');
+    let hls = null;
+
+    const video = document.getElementById('video-player');
+    const channelListEl = document.getElementById('channel-list');
+    const searchInput = document.getElementById('search-box');
+    const groupFilter = document.getElementById('group-filter');
+    const nowPlayingTitle = document.getElementById('now-playing-title');
+    const statusIndicator = document.getElementById('status-indicator');
+    const sourceSelector = document.getElementById('source-selector');
+    const urlLoader = document.getElementById('url-loader');
+    const toast = document.getElementById('toast');
+
+    // --- Toast notification ---
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // --- Parse M3U ---
+    function parseM3U(content) {
+      const lines = content.split('\n');
+      const list = [];
+      let temp = null;
+
+      for (let rawLine of lines) {
+        const line = rawLine.trim();
+        if (!line) continue;
+
+        if (line.startsWith('#EXTINF:')) {
+          const idMatch = line.match(/tvg-id="([^"]*)"/);
+          const nameMatch = line.match(/tvg-name="([^"]*)"/);
+          const groupMatch = line.match(/group-title="([^"]*)"/);
+          const qualityMatch = line.match(/tvg-quality="([^"]*)"/);
+
+          const titlePart = line.split(',').slice(1).join(',').trim();
+          const channelName = (nameMatch && nameMatch[1]) || titlePart || 'شبکه بدون نام';
+
+          temp = {
+            id: (idMatch && idMatch[1]) || '',
+            name: channelName,
+            group: (groupMatch && groupMatch[1]) || 'عمومی',
+            quality: (qualityMatch && qualityMatch[1]) || '',
+            url: ''
+          };
+          temp.isHD = /hd|1080|720/i.test(temp.quality) || /hd|1080|720/i.test(temp.name);
+        } else if (!line.startsWith('#') && temp) {
+          temp.url = line;
+          list.push(temp);
+          temp = null;
+        }
+      }
+      return list;
+    }
+
+    // --- Render Channels ---
+    function renderChannels() {
+      const q = searchInput.value.toLowerCase().trim();
+      const selectedGroup = groupFilter.value;
+      channelListEl.innerHTML = '';
+
+      const filtered = channels.filter((c) => {
+        const matchesQuery = c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q);
+        const matchesGroup = !selectedGroup || c.group === selectedGroup;
+        const isFav = favorites.includes(c.id || c.name);
+
+        if (activeTab === 'favs' && !isFav) return false;
+        if (activeTab === 'hd' && !c.isHD) return false;
+
+        return matchesQuery && matchesGroup;
+      });
+
+      if (filtered.length === 0) {
+        channelListEl.innerHTML = `<li style="text-align:center; padding: 30px; color: var(--text-muted); font-size: 0.85rem;">شبکه‌ای پیدا نشد</li>`;
+        return;
+      }
+
+      filtered.forEach((c) => {
+        const realIdx = channels.indexOf(c);
+        const isFav = favorites.includes(c.id || c.name);
+        const isActive = realIdx === currentChannelIdx;
+
+        const li = document.createElement('li');
+        li.className = `channel-item ${isActive ? 'active' : ''}`;
+        li.innerHTML = `
+          <div class="channel-info">
+            <span class="channel-title">${c.name}</span>
+            <div class="channel-meta">
+              ${c.isHD ? '<span class="badge badge-hd">HD</span>' : '<span class="badge">SD</span>'}
+              <span>${c.group}</span>
+            </div>
+          </div>
+          <div class="channel-actions">
+            <!-- Share Deep Link -->
+            <button class="icon-btn share-btn" title="اشتراک‌گذاری پیوند مستقیم کانال">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </button>
+            <!-- Favorite Toggle -->
+            <button class="icon-btn fav-btn ${isFav ? 'is-fav' : ''}" title="نشان کردن">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+            </button>
+          </div>
+        `;
+
+        li.onclick = (e) => {
+          if (e.target.closest('.icon-btn')) return;
+          playChannel(realIdx, true);
+        };
+
+        li.querySelector('.fav-btn').onclick = () => toggleFavorite(c.id || c.name);
+        li.querySelector('.share-btn').onclick = () => shareChannel(c);
+
+        channelListEl.appendChild(li);
+      });
+    }
+
+    function populateGroups() {
+      const groups = [...new Set(channels.map(c => c.group))].filter(Boolean).sort();
+      groupFilter.innerHTML = '<option value="">همه دسته‌ها</option>';
+      groups.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g;
+        opt.textContent = g;
+        groupFilter.appendChild(opt);
+      });
+    }
+
+    function toggleFavorite(id) {
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(item => item !== id);
+      } else {
+        favorites.push(id);
+      }
+      localStorage.setItem('iptv_favorites', JSON.stringify(favorites));
+      renderChannels();
+    }
+
+    // --- Deep Link Share & URL Sync ---
+    function shareChannel(channel) {
+      const shareUrl = new URL(window.location.origin + window.location.pathname);
+      shareUrl.searchParams.set('channel', channel.id || channel.name);
+      if (currentSourceUrl) {
+        shareUrl.searchParams.set('url', currentSourceUrl);
+      }
+
+      navigator.clipboard.writeText(shareUrl.toString()).then(() => {
+        showToast('پیوند مستقیم کپی شد: ' + channel.name);
+      });
+    }
+
+    function updateUrlState(channel) {
+      const url = new URL(window.location);
+      url.searchParams.set('channel', channel.id || channel.name);
+      if (currentSourceUrl) url.searchParams.set('url', currentSourceUrl);
+      window.history.replaceState({}, '', url);
+    }
+
+    // --- Stream Playback Engine ---
+    function playChannel(index, updateHistory = false) {
+      if (index < 0 || index >= channels.length) return;
+      currentChannelIdx = index;
+      const channel = channels[index];
+
+      nowPlayingTitle.textContent = channel.name;
+      setStatus('buffering');
+      renderChannels();
+
+      if (updateHistory) updateUrlState(channel);
+
+      if (hls) {
+        hls.destroy();
+        hls = null;
+      }
+
+      if (Hls.isSupported()) {
+        hls = new Hls({
+          enableWorker: true,
+          lowLatencyMode: true,
+          backBufferLength: 60
+        });
+
+        hls.loadSource(channel.url);
+        hls.attachMedia(video);
+
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().catch(() => {});
+          setStatus('online');
+        });
+
+        hls.on(Hls.Events.ERROR, (_, data) => {
+          if (data.fatal) {
+            setStatus('error');
+            if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+              hls.startLoad();
+            } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+              hls.recoverMediaError();
+            } else {
+              hls.destroy();
+            }
+          }
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = channel.url;
+        video.addEventListener('loadedmetadata', () => {
+          video.play();
+          setStatus('online');
+        });
+        video.addEventListener('error', () => setStatus('error'));
+      }
+    }
+
+    function setStatus(state) {
+      statusIndicator.className = `status-dot ${state}`;
+    }
+
+    // --- Load Playlist from URL ---
+    function loadFromUrl(url, targetChannelName = null) {
+      if (!url) return;
+      currentSourceUrl = url;
+      setStatus('buffering');
+      showToast('در حال دریافت لیست شبکه‌ها...');
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.text();
+        })
+        .then(text => {
+          channels = parseM3U(text);
+          populateGroups();
+          renderChannels();
+
+          // Check if deep link channel requested
+          if (targetChannelName) {
+            const targetIdx = channels.findIndex(
+              c => c.name.toLowerCase() === targetChannelName.toLowerCase() || 
+                   c.id.toLowerCase() === targetChannelName.toLowerCase()
+            );
+            if (targetIdx !== -1) {
+              playChannel(targetIdx);
+              return;
+            }
+          }
+
+          if (channels.length > 0) playChannel(0);
+          showToast(`لیست پخش با ${channels.length} شبکه بارگذاری شد`);
+        })
+        .catch(err => {
+          setStatus('error');
+          alert('خطا در بارگذاری لیست پخش: ' + err.message);
+        });
+    }
+
+    // --- UI Controls & Event Listeners ---
+    sourceSelector.addEventListener('change', () => {
+      if (sourceSelector.value === 'custom') {
+        urlLoader.style.display = 'inline-block';
+        urlLoader.focus();
+      } else {
+        urlLoader.style.display = 'none';
+        loadFromUrl(sourceSelector.value);
+      }
+    });
+
+    document.getElementById('btn-load-url').addEventListener('click', () => {
+      const selected = sourceSelector.value;
+      const targetUrl = (selected === 'custom') ? urlLoader.value.trim() : selected;
+      if (targetUrl) loadFromUrl(targetUrl);
+    });
+
+    document.getElementById('file-loader').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      currentSourceUrl = '';
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        channels = parseM3U(event.target.result);
+        populateGroups();
+        renderChannels();
+        if (channels.length > 0) playChannel(0);
+      };
+      reader.readAsText(file);
+    });
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTab = btn.dataset.tab;
+        renderChannels();
+      });
+    });
+
+    searchInput.addEventListener('input', renderChannels);
+    groupFilter.addEventListener('change', renderChannels);
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'SELECT'].includes(document.activeElement.tagName)) return;
+
+      if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) video.requestFullscreen();
+        else document.exitFullscreen();
+      } else if (e.key === 'm' || e.key === 'M') {
+        video.muted = !video.muted;
+      } else if (e.key === 'n' || e.key === 'N') {
+        if (currentChannelIdx < channels.length - 1) playChannel(currentChannelIdx + 1, true);
+      } else if (e.key === 'p' || e.key === 'P') {
+        if (currentChannelIdx > 0) playChannel(currentChannelIdx - 1, true);
+      }
+    });
+
+    // --- On Initial Page Load: Check Deep Links & Presets ---
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const deepLinkUrl = params.get('url');
+      const deepLinkChannel = params.get('channel');
+
+      // Use deep linked URL, or fallback to the Nexa Github default
+      const initialSource = deepLinkUrl || sourceSelector.value;
+
+      if (deepLinkUrl) {
+        sourceSelector.value = 'custom';
+        urlLoader.style.display = 'inline-block';
+        urlLoader.value = deepLinkUrl;
+      }
+
+      loadFromUrl(initialSource, deepLinkChannel);
+    });
+  </script>
+</body>
+</html>
