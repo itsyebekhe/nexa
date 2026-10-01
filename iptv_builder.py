@@ -1,131 +1,147 @@
-import pandas as pd
-import numpy as np
+#!/usr/bin/env python3
+"""
+IPTV Playlist Generator for iptv-org database.
+Fetches feed metadata and stream URLs, merges them, and generates an M3U file.
+"""
+
+from __future__ import annotations
+
+import argparse
+import logging
+import re
 import sys
+from pathlib import Path
+import pandas as pd
+import requests
 
-# --- CONFIGURATION ---
-INPUT_CSV_URL = 'https://raw.githubusercontent.com/iptv-org/database/master/data/feeds.csv'
-STREAMS_JSON_URL = 'https://iptv-org.github.io/api/streams.json'
-OUTPUT_FILE = 'playlist.m3u'
+# Default Configuration
+DEFAULT_FEEDS_URL = "https://raw.githubusercontent.com/iptv-org/database/master/data/feeds.csv"
+DEFAULT_STREAMS_URL = "https://iptv-org.github.io/api/streams.json"
+DEFAULT_LANG = "fas"          # Persian (ISO 639-3 code)
+DEFAULT_OUTPUT = "playlist.m3u"
+REQUEST_TIMEOUT = 15          # seconds
 
-# Filter settings
-TARGET_COLUMN = 'languages'
-SEARCH_TERM = 'fas' # Persian
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-def generate_playlist():
-    print("--- Starting Process ---")
 
-    # 1. Download and Filter CSV Data
-    print(f"1. Downloading metadata from: {INPUT_CSV_URL}")
+def fetch_dataframe(url: str, file_type: str = "csv") -> pd.DataFrame:
+    """Download data using requests to ensure timeouts and proper headers."""
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; PlaylistGenerator/2.0)"}
+    response = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
+    response.raise_for_status()
+
+    if file_type == "csv":
+        # Using io.StringIO prevents writing temp files to disk
+        from io import StringIO
+        return pd.read_csv(StringIO(response.text))
+    elif file_type == "json":
+        return pd.DataFrame(response.json())
+    else:
+        raise ValueError(f"Unsupported file type: {file_type}")
+
+
+def build_playlist(
+    lang: str = DEFAULT_LANG,
+    output_file: str = DEFAULT_OUTPUT,
+    feeds_url: str = DEFAULT_FEEDS_URL,
+    streams_url: str = DEFAULT_STREAMS_URL,
+    include_offline: bool = False,
+) -> None:
+    logging.info("Starting playlist generation...")
+
+    # 1. Download Feeds Metadata
+    logging.info(f"Downloading feeds metadata from: {feeds_url}")
     try:
-        df_csv = pd.read_csv(INPUT_CSV_URL)
+        df_feeds = fetch_dataframe(feeds_url, file_type="csv")
     except Exception as e:
-        print(f"Error downloading CSV: {e}")
-        return
+        logging.error(f"Failed to retrieve feeds CSV: {e}")
+        sys.exit(1)
 
-    # Check if target column exists
-    if TARGET_COLUMN not in df_csv.columns:
-        print(f"Error: Column '{TARGET_COLUMN}' not found in CSV.")
-        # Optional: Print available columns to help debug
-        print(f"Available columns: {list(df_csv.columns)}")
-        return
+    if "languages" not in df_feeds.columns:
+        logging.error("Column 'languages' was not found in the feeds dataset.")
+        sys.exit(1)
 
-    # Filter rows
-    print(f"   Filtering for {TARGET_COLUMN} = '{SEARCH_TERM}'...")
-    df_filtered = df_csv[df_csv[TARGET_COLUMN] == SEARCH_TERM].copy()
-    
-    # --- FIX FOR "CHANNEL NOT UNIQUE" ERROR ---
-    # We need a column named 'channel' to merge with streams.json.
-    # If the CSV has 'id' but not 'channel', we rename 'id' to 'channel'.
-    # If it already has 'channel', we do nothing.
-    if 'channel' not in df_filtered.columns and 'id' in df_filtered.columns:
-        print("   Renaming 'id' column to 'channel' for merging...")
-        df_filtered.rename(columns={'id': 'channel'}, inplace=True)
-    
-    print(f"   Found {len(df_filtered)} rows matching criteria.")
+    # 2. Filter by Language (Handles multi-languages like 'eng;fas')
+    logging.info(f"Filtering feeds for language: '{lang}'...")
+    lang_pattern = rf"\b{re.escape(lang)}\b"
+    df_filtered = df_feeds[
+        df_feeds["languages"].astype(str).str.contains(lang_pattern, regex=True, na=False)
+    ].copy()
+
+    # Ensure consistent channel key
+    if "channel" not in df_filtered.columns and "id" in df_filtered.columns:
+        df_filtered.rename(columns={"id": "channel"}, inplace=True)
 
     if df_filtered.empty:
-        print("No channels found. Stopping.")
+        logging.warning(f"No channels found matching language code '{lang}'.")
         return
 
-    # 2. Download JSON Data
-    print(f"2. Downloading streams from: {STREAMS_JSON_URL}")
+    logging.info(f"Found {len(df_filtered)} matching feed(s).")
+
+    # 3. Download Streams Data
+    logging.info(f"Downloading streams list from: {streams_url}")
     try:
-        df_streams = pd.read_json(STREAMS_JSON_URL)
+        df_streams = fetch_dataframe(streams_url, file_type="json")
     except Exception as e:
-        print(f"Error downloading JSON: {e}")
+        logging.error(f"Failed to retrieve streams JSON: {e}")
+        sys.exit(1)
+
+    # Filter out offline streams if requested
+    if not include_offline and "status" in df_streams.columns:
+        df_streams = df_streams[df_streams["status"] != "offline"]
+
+    # 4. Merge Feeds and Streams
+    logging.info("Merging feeds with streams...")
+    merged = pd.merge(
+        df_streams,
+        df_filtered,
+        on="channel",
+        how="inner",
+        suffixes=("_stream", "_feed"),
+    ).fillna("")
+
+    if merged.empty:
+        logging.warning("No active streams matched the filtered feeds.")
         return
 
-    # 3. Merge Data
-    print("3. Merging streams with csv data...")
-    
-    # We use suffixes to prevent naming collisions.
-    # Columns from streams.json keep their names.
-    # Columns from the CSV get '_info' added to them (e.g., 'name' -> 'name_info').
-    merged_df = pd.merge(
-        df_streams, 
-        df_filtered, 
-        on='channel', 
-        how='inner', 
-        suffixes=('', '_info')
-    )
-    
-    # Handle NaN values
-    merged_df = merged_df.replace({np.nan: ""})
-    
-    print(f"   Total streams matched: {len(merged_df)}")
+    logging.info(f"Total matched streams: {len(merged)}")
 
-    # 4. Generate M3U File
-    print(f"4. Writing M3U playlist to: {OUTPUT_FILE}")
-    
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as m3u:
+    # 5. Write M3U Playlist
+    output_path = Path(output_file)
+    logging.info(f"Writing M3U playlist to: {output_path.resolve()}")
+
+    with output_path.open("w", encoding="utf-8") as m3u:
         m3u.write("#EXTM3U\n")
 
-        for index, row in merged_df.iterrows():
-            # Get URL
-            url = str(row.get("url", "")).strip()
-            
-            # Skip if URL is empty
+        # itertuples is significantly faster than iterrows
+        for row in merged.itertuples(index=False):
+            url = str(getattr(row, "url", "")).strip()
             if not url:
                 continue
 
-            # --- NAME SELECTION ---
-            # You requested to use the Channel ID as the name.
-            # 'channel' is the ID used to merge the files.
-            channel_id = str(row.get("channel", "")).strip()
+            channel_id = str(getattr(row, "channel", "")).strip()
+            # Title fallback: feed name -> channel_id
+            name = str(getattr(row, "name_feed", "")).strip() or channel_id
             
-            # Use Channel ID as the title
-            title = channel_id
-            
-            # OPTIONAL: If you want ID + Name, uncomment the line below:
-            # human_name = str(row.get("name_info", "")).strip()
-            # title = f"{channel_id} | {human_name}"
+            # Format metadata
+            raw_area = str(getattr(row, "broadcast_area", ""))
+            group = raw_area.replace("c/", "").replace(";", ", ") if raw_area else "General"
+            language = str(getattr(row, "languages", ""))
+            quality = str(getattr(row, "format", ""))
+            user_agent = str(getattr(row, "user_agent", "")).strip()
+            referrer = str(getattr(row, "referrer", "")).strip()
 
-            # TVG ID (Guide ID)
-            tvg_id = channel_id
-            
-            # Group (Broadcast Area)
-            group = str(row.get("broadcast_area", "")).replace("c/", "").replace(";", ", ")
-            
-            # Language
-            language = str(row.get("languages", ""))
-            
-            # Quality/Format
-            quality = str(row.get("format", ""))
-            
-            # User Agent / Referrer
-            user_agent = str(row.get("user_agent", ""))
-            referrer = str(row.get("referrer", ""))
-
-            # Build EXTINF line
+            # Build EXTINF Header
             extinf = (
-                f'#EXTINF:-1 tvg-id="{tvg_id}" '
+                f'#EXTINF:-1 tvg-id="{channel_id}" '
+                f'tvg-name="{name}" '
                 f'group-title="{group}" '
                 f'tvg-language="{language}" '
-                f'tvg-quality="{quality}",{title}\n'
+                f'tvg-quality="{quality}",{channel_id}\n'
             )
             m3u.write(extinf)
 
-            # Add Headers if present
+            # Player compatibility: VLC options & JSON headers
             if user_agent:
                 m3u.write(f"#EXTVLCOPT:http-user-agent={user_agent}\n")
             if referrer:
@@ -133,7 +149,27 @@ def generate_playlist():
 
             m3u.write(f"{url}\n\n")
 
-    print(f"✅ Success! Playlist created: {OUTPUT_FILE}")
+    logging.info(f"✅ Success! Created {output_path.name} with {len(merged)} stream(s).")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate an M3U playlist from iptv-org.")
+    parser.add_argument(
+        "-l", "--lang", default=DEFAULT_LANG, help=f"ISO 639-3 language code (default: {DEFAULT_LANG})"
+    )
+    parser.add_argument(
+        "-o", "--output", default=DEFAULT_OUTPUT, help=f"Output file path (default: {DEFAULT_OUTPUT})"
+    )
+    parser.add_argument(
+        "--include-offline", action="store_true", help="Include streams marked as offline"
+    )
+    return parser.parse_args()
+
 
 if __name__ == "__main__":
-    generate_playlist()
+    args = parse_args()
+    build_playlist(
+        lang=args.lang,
+        output_file=args.output,
+        include_offline=args.include_offline,
+    )
