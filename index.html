@@ -137,7 +137,7 @@
       outline: none;
     }
 
-    /* Outer Container: min-height: 0 is CRITICAL for flex children scrolling */
+    /* Container */
     .container {
       display: flex;
       flex: 1;
@@ -163,6 +163,65 @@
       height: 100%;
       object-fit: contain;
       background: #000;
+    }
+
+    /* Error Overlay */
+    .player-error-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 13, 22, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      z-index: 20;
+      color: var(--text);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .player-error-overlay.active {
+      display: flex;
+    }
+
+    .error-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--danger);
+    }
+
+    .error-msg {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 80%;
+      line-height: 1.5;
+    }
+
+    .btn-retry {
+      background: var(--accent-grad);
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px var(--accent-glow);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-retry:hover {
+      opacity: 0.9;
+    }
+
+    .btn-retry:active {
+      transform: scale(0.96);
     }
 
     .stream-overlay {
@@ -216,7 +275,7 @@
       50% { opacity: 0.3; }
     }
 
-    /* Sidebar / Channel List Container */
+    /* Sidebar / Channel List */
     .sidebar {
       flex: 1;
       max-width: 380px;
@@ -226,7 +285,7 @@
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      min-height: 0; /* Ensures inner flex child can shrink and scroll */
+      min-height: 0;
       height: 100%;
       overflow: hidden;
     }
@@ -264,14 +323,13 @@
       border-color: transparent;
     }
 
-    /* Channel List: Touch scroll fix */
     .channel-list {
       list-style: none;
       flex: 1;
       min-height: 0;
-      overflow-y: scroll; /* Force vertical scroll */
-      -webkit-overflow-scrolling: touch; /* Momentum iOS scroll */
-      touch-action: pan-y; /* Tell mobile touch engine to allow vertical dragging */
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
       overscroll-behavior-y: contain;
       padding: 8px;
     }
@@ -366,7 +424,7 @@
       color: #fbbf24;
     }
 
-    /* Toast Notification */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -401,7 +459,7 @@
       flex-shrink: 0;
     }
 
-    /* MOBILE LAYOUT & SCROLL FIX */
+    /* Responsive */
     @media (max-width: 850px) {
       .brand-title {
         display: none;
@@ -413,7 +471,6 @@
         min-height: 0;
       }
 
-      /* Fixed 16:9 Aspect Video at top */
       .player-wrapper {
         flex: none;
         width: 100%;
@@ -421,7 +478,6 @@
         border-bottom: 2px solid var(--border);
       }
 
-      /* Sidebar takes all remaining vertical space */
       .sidebar {
         flex: 1;
         min-height: 0;
@@ -488,6 +544,22 @@
         <div id="status-indicator" class="status-dot"></div>
         <span id="now-playing-title">کانالی انتخاب نشده</span>
       </div>
+
+      <!-- Player Error / Retry Layer -->
+      <div id="player-error-overlay" class="player-error-overlay">
+        <svg class="error-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div id="error-message-text" class="error-msg">پخش استریم با خطا مواجه شد.</div>
+        <button id="btn-retry-stream" class="btn-retry">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 4v6h-6"></path>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+          تلاش مجدد
+        </button>
+      </div>
+
       <video id="video-player" controls autoplay playsinline></video>
     </main>
 
@@ -533,10 +605,28 @@
     const urlLoader = document.getElementById('url-loader');
     const toast = document.getElementById('toast');
 
+    const errorOverlay = document.getElementById('player-error-overlay');
+    const errorMsgText = document.getElementById('error-message-text');
+    const retryBtn = document.getElementById('btn-retry-stream');
+
     function showToast(message) {
       toast.textContent = message;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function setStatus(state) {
+      statusIndicator.className = `status-dot ${state}`;
+    }
+
+    function hideError() {
+      errorOverlay.classList.remove('active');
+    }
+
+    function showError(message) {
+      setStatus('error');
+      errorMsgText.textContent = message || 'امکان پخش زنده این شبکه وجود ندارد.';
+      errorOverlay.classList.add('active');
     }
 
     function parseM3U(content) {
@@ -677,6 +767,7 @@
       currentChannelIdx = index;
       const channel = channels[index];
 
+      hideError();
       nowPlayingTitle.textContent = channel.name;
       setStatus('buffering');
       renderChannels();
@@ -689,36 +780,52 @@
       }
 
       if (Hls.isSupported()) {
-        hls = new Hls({ enableWorker: true, lowLatencyMode: true, backBufferLength: 60 });
+        hls = new Hls({ 
+          enableWorker: true, 
+          lowLatencyMode: true, 
+          backBufferLength: 60,
+          manifestLoadingMaxRetry: 1, // جلوگیری از تلاش‌های پیاپی بی‌نهایت
+          levelLoadingMaxRetry: 1
+        });
+        
         hls.loadSource(channel.url);
         hls.attachMedia(video);
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          hideError();
           video.play().catch(() => {});
           setStatus('online');
         });
 
+        // عدم استفاده از لوپ خودکار بازنشانی و نمایش دکمه تلاش مجدد
         hls.on(Hls.Events.ERROR, (_, data) => {
           if (data.fatal) {
-            setStatus('error');
-            if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
-            else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
-            else hls.destroy();
+            hls.destroy();
+            hls = null;
+            showError('ارتباط با استریم شبکه برقرار نشد.');
           }
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = channel.url;
-        video.addEventListener('loadedmetadata', () => {
-          video.play();
+        
+        video.onloadedmetadata = () => {
+          hideError();
+          video.play().catch(() => {});
           setStatus('online');
-        });
-        video.addEventListener('error', () => setStatus('error'));
+        };
+
+        video.onerror = () => {
+          showError('خطا در پخش ویدیو.');
+        };
       }
     }
 
-    function setStatus(state) {
-      statusIndicator.className = `status-dot ${state}`;
-    }
+    // رویداد کلیک دکمه Retry
+    retryBtn.addEventListener('click', () => {
+      if (currentChannelIdx >= 0) {
+        playChannel(currentChannelIdx);
+      }
+    });
 
     function loadFromUrl(url, targetChannelName = null) {
       if (!url) return;
