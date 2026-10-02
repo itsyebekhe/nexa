@@ -165,7 +165,7 @@
       background: #000;
     }
 
-    /* Error Overlay */
+    /* Player Overlay (Auto retry & Manual retry) */
     .player-error-overlay {
       position: absolute;
       inset: 0;
@@ -187,6 +187,20 @@
       display: flex;
     }
 
+    /* Spinner */
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     .error-icon {
       width: 48px;
       height: 48px;
@@ -197,14 +211,20 @@
       font-size: 0.9rem;
       color: var(--text-muted);
       max-width: 80%;
-      line-height: 1.5;
+      line-height: 1.6;
+    }
+
+    .retry-countdown-num {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1rem;
     }
 
     .btn-retry {
       background: var(--accent-grad);
       color: #fff;
       border: none;
-      padding: 8px 20px;
+      padding: 9px 22px;
       border-radius: 8px;
       font-size: 0.85rem;
       font-weight: 600;
@@ -545,19 +565,32 @@
         <span id="now-playing-title">کانالی انتخاب نشده</span>
       </div>
 
-      <!-- Player Error / Retry Layer -->
+      <!-- Player Auto-Retry / Error Overlay -->
       <div id="player-error-overlay" class="player-error-overlay">
-        <svg class="error-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-        </svg>
-        <div id="error-message-text" class="error-msg">پخش استریم با خطا مواجه شد.</div>
-        <button id="btn-retry-stream" class="btn-retry">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M23 4v6h-6"></path>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+        <!-- 1. Auto Retry View -->
+        <div id="auto-retry-container" style="display: none; flex-direction: column; align-items: center; gap: 12px;">
+          <div class="spinner"></div>
+          <div class="error-msg">
+            در حال تلاش برای اتصال مجدد...
+            <br>
+            (<span id="retry-countdown" class="retry-countdown-num">5</span> ثانیه)
+          </div>
+        </div>
+
+        <!-- 2. Manual Retry View -->
+        <div id="manual-retry-container" style="display: none; flex-direction: column; align-items: center; gap: 14px;">
+          <svg class="error-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
           </svg>
-          تلاش مجدد
-        </button>
+          <div id="error-message-text" class="error-msg">پخش استریم این شبکه با خطا مواجه شد.</div>
+          <button id="btn-retry-stream" class="btn-retry">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 4v6h-6"></path>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            تلاش مجدد
+          </button>
+        </div>
       </div>
 
       <video id="video-player" controls autoplay playsinline></video>
@@ -595,6 +628,11 @@
     let favorites = JSON.parse(localStorage.getItem('iptv_favorites') || '[]');
     let hls = null;
 
+    // Retry settings
+    const RETRY_SECONDS = 5;
+    let retryInterval = null;
+    let isAutoRetrying = false;
+
     const video = document.getElementById('video-player');
     const channelListEl = document.getElementById('channel-list');
     const searchInput = document.getElementById('search-box');
@@ -606,6 +644,9 @@
     const toast = document.getElementById('toast');
 
     const errorOverlay = document.getElementById('player-error-overlay');
+    const autoRetryContainer = document.getElementById('auto-retry-container');
+    const manualRetryContainer = document.getElementById('manual-retry-container');
+    const retryCountdownEl = document.getElementById('retry-countdown');
     const errorMsgText = document.getElementById('error-message-text');
     const retryBtn = document.getElementById('btn-retry-stream');
 
@@ -619,14 +660,61 @@
       statusIndicator.className = `status-dot ${state}`;
     }
 
-    function hideError() {
+    function hideOverlays() {
+      stopAutoRetry();
       errorOverlay.classList.remove('active');
+      autoRetryContainer.style.display = 'none';
+      manualRetryContainer.style.display = 'none';
     }
 
-    function showError(message) {
+    function stopAutoRetry() {
+      if (retryInterval) {
+        clearInterval(retryInterval);
+        retryInterval = null;
+      }
+      isAutoRetrying = false;
+    }
+
+    function startAutoRetryCountdown() {
+      if (isAutoRetrying) return;
+      isAutoRetrying = true;
+
+      setStatus('buffering');
+      errorOverlay.classList.add('active');
+      autoRetryContainer.style.display = 'flex';
+      manualRetryContainer.style.display = 'none';
+
+      let secondsLeft = RETRY_SECONDS;
+      retryCountdownEl.textContent = secondsLeft;
+
+      // هر ثانیه شمارش معکوس را به‌روز و در صورت لزوم درخواست بارگذاری مجدد می‌دهد
+      retryInterval = setInterval(() => {
+        secondsLeft--;
+        retryCountdownEl.textContent = secondsLeft;
+
+        // تلاش میانی در پس‌زمینه
+        if (hls && secondsLeft % 2 === 0) {
+          hls.startLoad();
+        }
+
+        if (secondsLeft <= 0) {
+          stopAutoRetry();
+          showManualRetry('عدم موفقیت در برقراری ارتباط پس از چند تلاش.');
+        }
+      }, 1000);
+    }
+
+    function showManualRetry(message) {
+      stopAutoRetry();
+      if (hls) {
+        hls.destroy();
+        hls = null;
+      }
       setStatus('error');
       errorMsgText.textContent = message || 'امکان پخش زنده این شبکه وجود ندارد.';
       errorOverlay.classList.add('active');
+      autoRetryContainer.style.display = 'none';
+      manualRetryContainer.style.display = 'flex';
     }
 
     function parseM3U(content) {
@@ -767,7 +855,7 @@
       currentChannelIdx = index;
       const channel = channels[index];
 
-      hideError();
+      hideOverlays();
       nowPlayingTitle.textContent = channel.name;
       setStatus('buffering');
       renderChannels();
@@ -784,43 +872,49 @@
           enableWorker: true, 
           lowLatencyMode: true, 
           backBufferLength: 60,
-          manifestLoadingMaxRetry: 1, // جلوگیری از تلاش‌های پیاپی بی‌نهایت
-          levelLoadingMaxRetry: 1
+          manifestLoadingMaxRetry: 2,
+          levelLoadingMaxRetry: 2
         });
         
         hls.loadSource(channel.url);
         hls.attachMedia(video);
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          hideError();
           video.play().catch(() => {});
-          setStatus('online');
         });
 
-        // عدم استفاده از لوپ خودکار بازنشانی و نمایش دکمه تلاش مجدد
+        // مدیریت خطا: اجرای تلاش چند ثانیه‌ای
         hls.on(Hls.Events.ERROR, (_, data) => {
           if (data.fatal) {
-            hls.destroy();
-            hls = null;
-            showError('ارتباط با استریم شبکه برقرار نشد.');
+            if (!isAutoRetrying) {
+              startAutoRetryCountdown();
+              if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
+              else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+            }
           }
         });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = channel.url;
         
         video.onloadedmetadata = () => {
-          hideError();
           video.play().catch(() => {});
-          setStatus('online');
         };
 
         video.onerror = () => {
-          showError('خطا در پخش ویدیو.');
+          if (!isAutoRetrying) {
+            startAutoRetryCountdown();
+          }
         };
       }
     }
 
-    // رویداد کلیک دکمه Retry
+    // پخش موفقیت‌آمیز استریم
+    video.addEventListener('playing', () => {
+      hideOverlays();
+      setStatus('online');
+    });
+
+    // کلیک دکمه «تلاش مجدد» دستی
     retryBtn.addEventListener('click', () => {
       if (currentChannelIdx >= 0) {
         playChannel(currentChannelIdx);
